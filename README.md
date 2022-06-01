@@ -1,10 +1,4 @@
 
- ![dbmv2](https://user-images.githubusercontent.com/106641300/171318389-a77a2ef5-3c5a-4cf3-91b5-cfcc0772e215.gif)
-![Imagem7](https://user-images.githubusercontent.com/106641300/171318480-de52edb5-d87e-42d2-b702-388a123e9de9.png)
+ <p align="center"><img height="200" src="https://user-images.githubusercontent.com/106641300/171318631-110c9c46-0e1e-4eb4-b6d5-a901dd5c18df.png"></p>
 
-O DBM Brazil Mods é um projeto de código aberto orientado pela comunidade destinado a modificar, estender e melhorar o Discord Bot Maker.
-<br>
-
-Na barra superior do Discord Bot Maker, clique em Project → Open Directory do seu pacote correspondente (por exemplo, Open Actions Directory)
-Extraia o conteúdo do arquivo .zip na pasta que você acabou de abrir (substitua os arquivos existentes, se solicitado)
-Você precisará repetir esse processo para todos os seus projetos<
+<p align="center">O <a href="https://discord.gg/HBc9u9tktd">DBM Brazil</a> é uma comunidade de código aberto destinado a modificar, estender e melhorar o <a href="https://store.steampowered.com/app/682130/Discord_Bot_Maker">Discord Bot Maker</a>.</p>
