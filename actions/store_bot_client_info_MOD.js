@@ -58,7 +58,7 @@ module.exports = {
       'ID do proprietário do bot',
       'Os comandos diferenciam maiúsculas de minúsculas?',
       'ID da última mensagem',
-      'Média média de CPU (1m, 5m, 15m)',
+      'Média de CPU (1m, 5m, 15m)',
       'Uso atual da CPU',
     ];
     return `Bot Client - ${info[parseInt(data.info, 10)]}`;
