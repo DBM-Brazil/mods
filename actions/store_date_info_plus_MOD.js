@@ -2,11 +2,11 @@ module.exports = {
   name: 'Store Date Info Plus',
   section: 'Other Stuff',
   meta: {
-    version: '2.1.1',
-    preciseCheck: false,
-    author: 'DBM Mods',
-    authorUrl: 'https://github.com/dbm-network/mods',
-    downloadURL: 'https://github.com/dbm-network/mods/blob/master/actions/store_date_info_plus_MOD.js',
+    version: '2.1.3',
+    preciseCheck: true,
+    author: '[Tempest - 321400509326032897]',
+    authorUrl: 'https://github.com/DBM-Brazil/mods',
+    downloadURL: 'https://github.com/DBM-Brazil/mods',
   },
 
   subtitle(data) {
