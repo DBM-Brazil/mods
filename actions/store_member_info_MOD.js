@@ -16,7 +16,7 @@ module.exports = {
       "Nome de usuário do membro",
       "Nome de exibição do membro",
       "Cor do Membro",
-      "Servidor do Membro",
+      "Nome do Servidor do Membro",
       "Última mensagem do membro (removido)",
       "Cargo mais alta do membro",
       "Cargo de elevação do membro",
@@ -38,7 +38,7 @@ module.exports = {
       "Membro entrou no servidor em",
       "Timestamp do membro que entrou no servidor",
       "ID da última mensagem (removido)",
-      "Lista de permissões de membros",
+      "Lista de permissões do membro",
       "Lista de Badges do Membro",
       "Status do cliente membro",
       "Status personalizado de membro",
@@ -169,7 +169,7 @@ module.exports = {
   <option value="16">URL do avatar do membro</option>
   <option value="34">URL do banner do membro</option>
   <option value="31">URL do Avatar do Servidor do Membro</option>
-  <option value="5">Servidor do membro</option>
+  <option value="5">Nome do Servidor do membro</option>
   <option value="35">ID do servidor do membro</option>
   <option value="6">Última mensagem do membro (removida)</option>
   <option value="26">ID da última mensagem do membro (removido)</option>
@@ -189,7 +189,7 @@ module.exports = {
   <option value="23">Timestamp da conta criada pelo membro</option>
   <option value="24">Membro entrou no servidor em</option>
   <option value="25">Timestamp do membro que entrou no servidor</option>
-  <option value="27">Lista de permissões do membros</option>
+  <option value="27">Lista de permissões do membro</option>
   <option value="28">Lista de badges do membro</option>
   <option value="29">Status do cliente membro [Web ou Mobile]</option>
   <option value="32">Tempo esgotado do membro em</option>
