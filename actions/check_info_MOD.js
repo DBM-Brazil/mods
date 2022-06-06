@@ -1,6 +1,6 @@
 module.exports = {
 
-  name: "Check Variable",
+  name: "Check Info",
   section: "Conditions",
   meta: {
     version: '2.1.3',
@@ -14,15 +14,15 @@ module.exports = {
     return `${presets.getConditionsText(data)}`;
   },
 
-  fields: ["storage", "varName", "comparison", "value", "value2", "branch"],
+  fields: ["storage", "comparison", "value", "value2", "branch"],
 
 
   html(isEvent, data) {
     return `
-<retrieve-from-variable allowSlashParams dropdownLabel="Variavel" selectId="storage" variableContainerId="varNameContainer" variableInputId="varName"></retrieve-from-variable>
+    <span class="dbminputlabel">Informação</span><br>
+<textarea id="storage" rows="5" placeholder="Insira a informação aqui..." style="width: 99%; font-family: monospace; white-space: nowrap;"></textarea>
 
-<br><br><br>
-
+<br>
 <div style="padding-top: 8px;">
 	<div style="float: left; width: 35%;">
 		<span class="dbminputlabel">Tipo de comparação</span><br>
@@ -55,11 +55,10 @@ module.exports = {
 </div>
 </div>
 
-<br><br><br><br>
+<br><br><br>
 
 <hr class="subtlebar">
 
-<br>
 
 <conditional-input id="branch" style="padding-top: 8px;"></conditional-input>`;
   },
@@ -103,12 +102,8 @@ module.exports = {
 
   action(cache) {
     const data = cache.actions[cache.index];
-    const type = parseInt(data.storage, 10);
-    const varName = this.evalMessage(data.varName, cache);
-    const variable = this.getVariable(type, varName, cache);
+    const val1 = this.evalMessage(data.storage, cache);
     let result = false;
-
-    const val1 = variable;
     const compare = parseInt(data.comparison, 10);
     let val2 = data.value;
     let val3 = data.value2;
