@@ -3,8 +3,8 @@ module.exports = {
     name: 'Backup',
     section: 'Other Stuff',
     meta: {
-      version: '2.1.3',
-      preciseCheck: true,
+      version: '2.1.4',
+      preciseCheck: false,
       author: '[Tempest - 321400509326032897]',
       authorUrl: 'https://github.com/DBM-Brazil/mods',
       downloadURL: 'https://github.com/DBM-Brazil/mods',
