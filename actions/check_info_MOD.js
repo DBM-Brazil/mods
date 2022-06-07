@@ -157,7 +157,7 @@ module.exports = {
           result = Boolean(val1.toString().match(new RegExp(val2)))
           break;
           case 15:
-          var number = parseInt(this.evalMessage(val1, cache));
+          var number = parseInt(this.evalMessage(val1.toString(), cache));
           if(number >= val2 && number <= val3) {
           result = number;}
           break;
