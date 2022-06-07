@@ -1,9 +1,8 @@
-/* eslint-disable no-empty */
 module.exports = {
   name: 'Translate',
   section: 'Other Stuff',
   meta: {
-    version: '2.1.3',
+    version: '2.1.4',
     preciseCheck: true,
     author: '[Tempest - 321400509326032897]',
     authorUrl: 'https://github.com/DBM-Brazil/mods',
