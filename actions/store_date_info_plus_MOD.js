@@ -4,7 +4,7 @@ module.exports = {
     name: "Store Date Info Plus",
     section: "Other Stuff",
     meta: {
-        version: '2.1.3',
+        version: '2.1.4',
         preciseCheck: false,
         author: '[XinXyla - 172782058396057602]<br>[Tempest - 321400509326032897]',
         authorUrl: 'https://github.com/DBM-Brazil/mods',
