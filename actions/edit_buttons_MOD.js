@@ -3,7 +3,7 @@ module.exports = {
   name: "Edit Buttons",
   section: "Messaging",
   meta: {
-    version: '2.1.3',
+    version: '2.1.4',
     preciseCheck: true,
     author: '[XinXyla - 172782058396057602]',
     authorUrl: 'https://github.com/DBM-Brazil/mods',
