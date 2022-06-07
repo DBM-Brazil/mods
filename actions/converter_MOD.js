@@ -4,7 +4,7 @@ module.exports = {
     section: "Other Stuff",   
     short_description: "Converte uma informação em texto,número ou formato",
     meta: {
-        version: '2.1.3',
+        version: '2.1.4',
         preciseCheck: true,
         author: '[XinXyla - 172782058396057602]<br>[Tempest - 321400509326032897]',
         authorUrl: 'https://github.com/DBM-Brazil/mods',
@@ -128,7 +128,11 @@ module.exports = {
                     result = theVar.toString().trim();
                     break;
                     case 8:
-                    result = theVar.toLocaleString("pt-BR");
+                    if(isNaN(parseFloat(theVar))) {
+                        result = theVar;
+                    } else {
+                        result = parseFloat(theVar).toLocaleString("pt-BR");
+                    }
                     break;
                     case 9:
                     var number = parseInt(this.evalMessage(theVar, cache));
