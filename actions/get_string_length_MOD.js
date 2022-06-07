@@ -4,7 +4,7 @@ module.exports = {
 name: "Get String Length",
 section: "Other Stuff",
 meta: {
-	version: '2.1.3',
+	version: '2.1.4',
 	preciseCheck: false,
 	author: '[XinXyla - 172782058396057602]',
 	authorUrl: 'https://github.com/DBM-Brazil/mods',
