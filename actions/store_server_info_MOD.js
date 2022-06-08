@@ -4,7 +4,7 @@ module.exports = {
   section: "Server Control",
   meta: {
     version: '2.1.4',
-    preciseCheck: false,
+    preciseCheck: true,
     author: '[XinXyla - 172782058396057602]',
     authorUrl: 'https://github.com/DBM-Brazil/mods',
     downloadURL: 'https://github.com/DBM-Brazil/mods',
@@ -38,7 +38,7 @@ module.exports = {
       "Contagem de Canais do Servidor",
       "Contagem de emojis do servidor",
       "Incorporação de servidor habilitada",
-      "Servidor Não Perturbe Contagem de Membros",
+      "Contagem de membros ocupados do servidor",
       "Contagem de membros online do servidor",
       "Contagem de membros offline do servidor",
       "Contagem de membros ociosos do servidor",
@@ -74,15 +74,17 @@ module.exports = {
       "Nível NSFW do Servidor",
       "Nível MFA/2FA do Servidor",
       "Timestamp do Servidor",
+      "URL do Template",
+      "Código do Template",
+      "Nome do Template",
+      "Descrição do Template",
+      "Vezes que o Template foi usado",
+      "ID do criador do Template",
+      "Timestamp da criação do Template",
+      "Timestamp da atualização do Template",
     ];
     return `${presets.getServerText(data.server, data.varName)} - ${info[parseInt(data.info, 10)]}`;
   },
-
-  //---------------------------------------------------------------------
-  // Action Storage Function
-  //
-  // Stores the relevant variable info for the editor.
-  //---------------------------------------------------------------------
 
   variableStorage(data, varType) {
     const type = parseInt(data.storage, 10);
@@ -234,6 +236,31 @@ module.exports = {
       case 61:
         dataType = "Timestamp";
         break;
+        case 62:
+          dataType = "URL";
+          break;
+          case 63:
+            dataType = "Code";
+            break;
+            case 64:
+              dataType = "Text";
+              break;
+              case 65:
+                dataType = "Text";
+                break;
+                case 66:
+                  dataType = "Number";
+                  break;
+                  case 67:
+                    dataType = "ID User";
+                    break;
+                    case 68:
+                      dataType = "Timestamp";
+                      break;
+                      case 69:
+                        dataType = "Timestamp";
+                        break;
+
     }
     return [data.varName2, dataType];
   },
@@ -331,8 +358,18 @@ module.exports = {
       <optgroup label="Contagem de Status do Servidor">
       <option value="27">Contagem de membros online do servidor</options>
       <option value="29">Contagem de membros inativos do servidor</options>
-      <option value="26">Contagem de membros do servidor Não perturbe</options>
+      <option value="26">Contagem de membros ocupados do servidor</options>
       <option value="28">Contagem de membros offline do servidor</options>
+      </optgroup>
+      <optgroup label="Template do Servidor">
+      <option value="62">URL do Template</options>
+      <option value="63">Código do Template</options>
+      <option value="64">Nome do Template</options>
+      <option value="65">Descrição do Template</options>
+      <option value="66">Vezes que o Template foi usado</options>
+      <option value="67">ID do criador do Template</options>
+      <option value="68">Timestamp da criação do Template</options>
+      <option value="69">Timestamp da atualização do Template</options>
       </optgroup>
 		</select>
 	</div>
@@ -551,6 +588,30 @@ module.exports = {
       case 61:
         result = targetServer.createdTimestamp;
         break;
+        case 62:
+          result = `https://discord.new/${(await targetServer.fetchTemplates()).map(v => v.code)}`;
+          break;
+      case 63:
+          result = `${(await targetServer.fetchTemplates()).map(v => v.code)}`;
+          break;
+          case 64:
+          result = `${(await targetServer.fetchTemplates()).map(v => v.name)}`;
+          break;
+          case 65:
+          result = `${(await targetServer.fetchTemplates()).map(v => v.description)}`;
+          break;
+          case 66:
+          result = `${(await targetServer.fetchTemplates()).map(v => v.usageCount)}`;
+          break;
+          case 67:
+          result = `${(await targetServer.fetchTemplates()).map(v => v.creatorId)}`;
+          break;
+          case 68:
+          result = `${(await targetServer.fetchTemplates()).map(v => v.createdAt)}`;
+          break;
+          case 69:
+          result = `${(await targetServer.fetchTemplates()).map(v => v.updatedAt)}`;
+          break;      
       default:
         break;
     }
