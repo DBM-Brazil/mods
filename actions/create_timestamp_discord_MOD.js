@@ -66,14 +66,12 @@ module.exports = {
         const moment = require('moment');
         const saida = parseInt(data.saida, 10);
         
-        var date = moment(Date.parse(this.evalMessage(data.date, cache))).format("DD/MM/YYYY HH:mm:ss");
+        var date = moment(Date.parse(this.evalMessage(data.date, cache))).format("X");
 
         if(date == "Invalid date") {
             console.error("Action Create Timestamp Discord: Formato de data inválido!");
             result = "Formato de data inválido!";
         } else {
-            date = moment(date).format("X");
-            
             switch (saida) {
                     case 0:
                         result = "<t:" + date + ":t>";
