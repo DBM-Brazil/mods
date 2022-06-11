@@ -158,7 +158,7 @@ module.exports = {
       const date = moment(
         Date.parse(this.evalMessage(data.sourceDate, cache)),
         '',
-        dateLanguage === '' ? 'pt-BR' : dateLanguage,
+        dateLanguage === '' ? 'pt' : dateLanguage,
       ).tz(timezone);
       const buildInput = this.evalMessage(data.buildInput, cache);
       const modeType = parseInt(this.evalMessage(data.modeStorage, cache), 10);
