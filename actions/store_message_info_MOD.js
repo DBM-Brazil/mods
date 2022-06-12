@@ -265,7 +265,7 @@ module.exports = {
 
     if (!msg) {
       this.callNextAction(cache);
-      return;
+      return this.callNextAction(cache);
     }
 
     const info = parseInt(data.info, 10);
