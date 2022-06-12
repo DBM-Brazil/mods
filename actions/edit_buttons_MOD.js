@@ -61,18 +61,18 @@ switch (type) {
 
 
   <span class="dbminputlabel">Alterar o nome para</span><br>
-  <input id="alterarnome" class="round" type="text" name="is-eval">
+  <input id="alterarnome" class="round" type="text">
 
   <br>
 
   <span class="dbminputlabel">Alterar o emoji para</span><br>
-  <input id="alteraremoji" class="round" type="text" name="is-eval">
+  <input id="alteraremoji" class="round" type="text">
 
   <br>
 
 
 <span class="dbminputlabel">Alterar o type para</span><br>
-<input id="alterartype" value="PRIMARY" class="round" type="text" name="is-eval"><br>
+<input id="alterartype" value="PRIMARY" class="round" type="text"><br>
 PRIMARY (Azul)<br>
 SECONDARY (Cinza)<br>
 SUCCESS (Verde)<br>

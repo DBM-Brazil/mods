@@ -48,10 +48,10 @@ module.exports = {
 	</div>
 	<table style="float: right;width: 65%;"><tr><td style="padding:0px 8px";><div style="width: 100%" id="directValue">
 		<span class="dbminputlabel">Valor para comparar</span>
-		<input id="value" class="round" type="text" name="is-eval">
+		<input id="value" class="round" type="text">
 	</div></td><td style="padding:0px 3px";> <div style="width: 100%;" id="containerxin">
   <span class="dbminputlabel">e</span><br>
-  <input id="value2" class="round" type="text" name="is-eval"></td></tr></table>
+  <input id="value2" class="round" type="text"></td></tr></table>
 </div>
 </div>
 
@@ -110,8 +110,8 @@ module.exports = {
 
     const val1 = variable;
     const compare = parseInt(data.comparison, 10);
-    let val2 = data.value;
-    let val3 = data.value2;
+    let val2 = this.evalMessage(data.value, cache);
+    let val3 = this.evalMessage(data.value2, cache);
     if (compare !== 6) val2 = this.evalIfPossible(val2, cache);
     switch (compare) {
       case 0:
