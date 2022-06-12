@@ -82,6 +82,9 @@ module.exports = {
       "ID do criador do Template",
       "Timestamp da criação do Template",
       "Timestamp da atualização do Template",
+      "Total de membros no canal de voz",
+      "Lista de membros por ID presentes nos canais de voz",
+      "Lista de membros presentes nos canais de voz",
     ];
     return `${presets.getServerText(data.server, data.varName)} - ${info[parseInt(data.info, 10)]}`;
   },
@@ -260,6 +263,15 @@ module.exports = {
                       case 69:
                         dataType = "Timestamp";
                         break;
+                        case 70:
+                          dataType = "Number";
+                          break;
+                          case 71:
+                            dataType = "List";
+                            break;
+                            case 72:
+                              dataType = "List";
+                              break;
 
     }
     return [data.varName2, dataType];
@@ -315,6 +327,7 @@ module.exports = {
       <option value="23">Contagem de canais do servidor</options>
       <option value="38">Contagem de canais de texto do servidor</options>
       <option value="39">Contagem de canais de voz do servidor</options>
+      <option value="70">Total de membros nos canais de voz</options>
       </optgroup>
       <optgroup label="Informações da comunidade do servidor"">
       <option value="54">Servidor em parceria</options>
@@ -350,6 +363,8 @@ module.exports = {
       <option value="32">Lista de IDs de funções de servidor</options>
       <option value="41">Lista de banidos do servidor</options>
       <option value="42">Lista de convites do servidor</options>
+      <option value="71">Lista de membros por ID presentes nos canais de voz</options>
+      <option value="72">Lista de membros presentes nos canais de voz</options>
       </optgroup>
       <optgroup label="Informações do Dono do servidor">
       <option value="48">ID do Dono do servidor</options>
@@ -611,7 +626,16 @@ module.exports = {
           break;
           case 69:
           result = `${(await targetServer.fetchTemplates()).map(v => v.updatedAt)}`;
-          break;      
+          break; 
+          case 70:
+            result = targetServer.channels.cache.filter(c => c.type === 'GUILD_VOICE').map(c => c.members.size).reduce((s, a) => s + a, 0);
+            break; 
+            case 71:
+              result = targetServer.channels.cache.filter(c => c.type === 'GUILD_VOICE').map(c => c.members.map(member => member.user.id)).join('');   
+              break;     
+              case 72:
+                result = targetServer.channels.cache.filter(c => c.type === 'GUILD_VOICE').map(c => c.members.map(member => member.user)).join('');   
+                break;             
       default:
         break;
     }
