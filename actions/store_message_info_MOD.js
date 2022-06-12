@@ -363,7 +363,7 @@ module.exports = {
           result = msg.embeds[embednumero].author.name;
         break;
         case 31:
-          result = msg.embeds[embednumero].author.icon_url;
+          result = msg.embeds[embednumero].author.iconURL;
         break;
         case 32:
           result = msg.embeds[embednumero].author.url;
@@ -372,10 +372,10 @@ module.exports = {
           result = msg.embeds[embednumero].footer.text;
         break;
         case 34:
-          result = msg.embeds[embednumero].footer.icon_url;
+          result = msg.embeds[embednumero].footer.iconURL;
         break;
         case 35:
-          result = msg.embeds[embednumero].fields[field].name
+          result = msg.embeds[embednumero].fields[field].name;;
         break;
         case 36:
           result = msg.embeds[embednumero].fields[field].value;
