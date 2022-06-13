@@ -25,7 +25,7 @@ module.exports = {
 
 <br><br><br>
 
-<role-input style="padding-top: 8px;" dropdownLabel="Source Role" selectId="role" variableContainerId="varNameContainer2" variableInputId="varName2"></role-input>
+<role-input style="padding-top: 8px;" dropdownLabel="Cargo" selectId="role" variableContainerId="varNameContainer2" variableInputId="varName2"></role-input>
 
 <br><br><br>
 <br>
