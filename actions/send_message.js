@@ -89,6 +89,8 @@ module.exports = {
     "editMessageVarName",
     "storage",
     "varName2",
+    "iffalse",
+    "iffalseVal",
   ],
 
   //---------------------------------------------------------------------
@@ -106,7 +108,7 @@ module.exports = {
     return `
 <send-reply-target-input selectId="channel" variableInputId="varName"></send-reply-target-input>
 
-<br><br><br>
+<br><br>
 
 <tab-system style="margin-top: 20px;">
 
@@ -452,9 +454,7 @@ module.exports = {
         <dbm-checkbox id="dontSend" label="Don't Send Message"></dbm-checkbox>
       </div>
 
-      <br>
-
-      <hr class="subtlebar" style="margin-top: 4px; margin-bottom: 4px;">
+ 
 
       <br>
 
@@ -470,11 +470,23 @@ module.exports = {
         <store-in-variable allowNone selectId="storage" variableInputId="varName2" variableContainerId="varNameContainer2"></store-in-variable>
       </div>
 
-      <br><br>
-
-      <div></div>
+      <br><br><br>
+      <div>
+      <div style="float: left; width: 35%;">
+      <span class="dbminputlabel">If Message Delivery Fails</span><br>
+      <select id="iffalse" class="round" onchange="glob.onComparisonChanged(this)">
+      <option value="0">Continue Actions</option>
+      <option value="1" selected>Stop Action Sequence</option>
+      <option value="2">Jump to action</option>
+      <option value="3">Skip Next Actions</option>
+      <option value="4">Go to Action Anchor</option>
+    </select>
+    </div>
+    <div id="iffalseContainer" style="display: none; float: right; width: 60%;"><span id="ifName" class="dbminputlabel">For</span><br><input id="iffalseVal" class="round" type="text"></div>
+      <br><br><br>
     </div>
   </tab>
+
 </tab-system>`;
   },
 
@@ -486,8 +498,19 @@ module.exports = {
   // functions for the DOM elements.
   //---------------------------------------------------------------------
 
-  init() {},
+  init: function() {
+    const {glob, document} = this;
+  
 
+    glob.onComparisonChanged = function (event) {
+      if (event.value > "1") {
+        document.getElementById("iffalseContainer").style.display = null;
+      } else {
+        document.getElementById("iffalseContainer").style.display = "none";
+      }}
+      glob.onComparisonChanged(document.getElementById("iffalse"));
+
+  },
   //---------------------------------------------------------------------
   // Action Editor On Save
   //
@@ -810,6 +833,7 @@ module.exports = {
         promise
           .then(onComplete)
           .catch((err) => this.displayError(data, cache, err));
+          this.executeResults(false, data, cache);
       }
     }
 
@@ -818,6 +842,7 @@ module.exports = {
         .edit(messageOptions)
         .then(onComplete)
         .catch((err) => this.displayError(data, cache, err));
+        this.executeResults(false, data, cache);
     }
 
     else if (isMessageTarget && target?.reply) {
@@ -825,6 +850,7 @@ module.exports = {
         .reply(messageOptions)
         .then(onComplete)
         .catch((err) => this.displayError(data, cache, err));
+        this.executeResults(false, data, cache);
     }
 
     else if (data.reply === true && canReply) {
@@ -846,6 +872,7 @@ module.exports = {
         .send(messageOptions)
         .then(onComplete)
         .catch((err) => this.displayError(data, cache, err));
+        this.executeResults(false, data, cache);
     }
 
     else {
