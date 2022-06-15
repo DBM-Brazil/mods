@@ -294,7 +294,7 @@ module.exports = {
 		<span class="dbminputlabel">Informações</span><br>
 		<select id="info" class="round">
       <optgroup label="Informações Gerais do Servidor">
-      <option value="0">servidor (Objeto)</options>
+      <option value="0">Servidor (Objeto)</options>
       <option value="1">ID do servidor</options>
       <option value="2">Nome do servidor</options>
       <option value="3">Acrônimo do nome do servidor</options>
