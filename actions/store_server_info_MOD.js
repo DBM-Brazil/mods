@@ -631,11 +631,12 @@ module.exports = {
             result = targetServer.channels.cache.filter(c => c.type === 'GUILD_VOICE').map(c => c.members.size).reduce((s, a) => s + a, 0);
             break; 
             case 71:
-              result = targetServer.channels.cache.filter(c => c.type === 'GUILD_VOICE').map(c => c.members.map(member => member.user.id)).join('');   
+              const str = targetServer.channels.cache.filter(c => c.type === 'GUILD_VOICE').map(c => c.members.map(member => member.user.id + ',').join('')).join('');  
+              result = str.substring(0, str.length - 1).split(new RegExp(","));
               break;     
               case 72:
-                result = targetServer.channels.cache.filter(c => c.type === 'GUILD_VOICE').map(c => c.members.map(member => member.user)).join('');   
-                break;             
+                result = targetServer.channels.cache.filter(d => d.type === 'GUILD_VOICE').map(d => d.members.map(member => member.user).join('')).join('');  
+                break;                 
       default:
         break;
     }
