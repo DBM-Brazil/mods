@@ -5,14 +5,14 @@ module.exports = {
     section: "Other Stuff",
     meta: {
         version: '2.1.4',
-        preciseCheck: false,
-        author: '[XinXyla - 172782058396057602]<br>[Tempest - 321400509326032897]',
+        preciseCheck: true,
+        author: '[XinXyla - 172782058396057602]',
         authorUrl: 'https://github.com/DBM-Brazil/mods',
         downloadURL: 'https://github.com/DBM-Brazil/mods',
       },
    
     subtitle: function(data) {
-        const info = ['Dia da semana', 'Dia (numero)', 'Dia do ano', 'Semana do ano', 'Mês do ano', 'Mês (numero)', 'Ano', 'Hora', 'Minutos', 'Segundos', 'Milissegundos', 'Fuso horário', 'Unix Timestamp', 'Data completa']
+        const info = ['Dia da semana', 'Dia (numero)', 'Dia do ano', 'Semana do ano', 'Mês do ano', 'Mês (numero)', 'Ano', 'Hora', 'Minutos', 'Segundos', 'Milissegundos', 'Fuso horário', 'Unix Timestamp']
         const storage = ['', 'Variavel Temporaria', 'Variavel Servidor', 'Variavel Global']
         return `${data.modeStorage === "0" ? '"' + info[data.info] + '"' : data.buildInput === "" ? '"Não configurado"' : '"' + data.buildInput + '"'} de uma data ~ ${storage[data.storage]}`;
     },
@@ -28,32 +28,28 @@ module.exports = {
         return ([data.varName, dataType]);
     },
         
-    fields: ["sourceDate", 'timezone', "dateLanguage", "modeStorage", "info", "buildInput", "storage", "varName"],
+    fields: ["sourceDate", "dateLanguage", "modeStorage", "info", "buildInput", "storage", "varName"],
     
         html: function(isEvent, data) {
         return `
 
         <div style="float: left; width: 62%;margin:0px 4px;">
-        <span class="dbminputlabel">Data de origem</span><br>
-            <input id="sourceDate" class="round" type="text" placeholder="Ex: Sun Oct 26 2019 10:38:01 GMT+0200 ou \${new Date}">
+        <span class="dbminputlabel">Data de origem:</span><br>
+            <input id="sourceDate" class="round" type="text" placeholder="Ex: Sun Oct 26 2019 10:38:01 GMT+0200">
         </div>
         <div style="float: right; width: 35%">
-        <span class="dbminputlabel">Idioma da data (iniciais)</span><br>
-           <input id="dateLanguage" value="en" class="round" placeholder='O padrão é "en" (Inglês)'>
+        <span class="dbminputlabel">Idioma da data (iniciais):</span><br>
+           <input id="dateLanguage" class="round" placeholder='O padrão é "en" (Inglês)'>
         </div><br><br><br>
-        <div style="float: left; width: 100%">
-        <span class="dbminputlabel">Timezone (<span class="wrexlink" data-url="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">Timezones</span>)</span><br>
-    <input id="timezone" class="round" type="text" placeholder="Ex: America/Sao_Paulo" value="America/Sao_Paulo">
-</div><br><br><br>
         <div style="float: left; width: 35%; margin:0px 4px">
-        <span class="dbminputlabel">Modo</span><br>
+        <span class="dbminputlabel">Modo:</span><br>
             <select id="modeStorage" class="round" onchange="glob.onChangeMode(this)">
                 <option value="0" selected>Selecionar</option>
                 <option value="1">Construir</option>
             </select>
         </div>
         <div id="selectMode" style="display: none; float: right; width: 62%">
-        <span class="dbminputlabel">Informação</span><br>
+        <span class="dbminputlabel">Informação:</span><br>
             <select id="info" class="round">
                 <option value="0" selected>Dia da semana</option>
                 <option value="1">Dia [número]</option>
@@ -141,7 +137,7 @@ module.exports = {
             wrexlink.setAttribute("title", url);
             wrexlink.addEventListener("click", function(e){
               e.stopImmediatePropagation();
-              console.log("URL de lançamento: [" + url + "] em seu navegador padrão.")
+              console.log("Launching URL: [" + url + "] in your default browser.")
               require('child_process').execSync('start ' + url);
             });
           }   
@@ -150,21 +146,16 @@ module.exports = {
     
 
     
-    async action(cache) {
-      const data = cache.actions[cache.index];
-      const moment = require('moment-timezone');
-      const dateLanguage = this.evalMessage(data.dateLanguage, cache);
-      const timezone = this.evalMessage(data.timezone, cache);
-      const date = moment(
-        Date.parse(this.evalMessage(data.sourceDate, cache)),
-        '',
-        dateLanguage === '' ? 'pt-BR' : dateLanguage,
-      ).tz(timezone);
-      const buildInput = this.evalMessage(data.buildInput, cache);
-      const modeType = parseInt(this.evalMessage(data.modeStorage, cache), 10);
-      const info = parseInt(data.info, 10);
-  
-      let result;
+    action: function(cache) {
+        const data = cache.actions[cache.index];
+        const moment = this.getWrexMods().require("moment");
+        const dateLanguage = this.evalMessage(data.dateLanguage, cache);
+        const date = moment(Date.parse(this.evalMessage(data.sourceDate, cache)), "", dateLanguage === "" ? "en" : dateLanguage);
+        const buildInput = this.evalMessage(data.buildInput, cache);
+        const modeType = parseInt(this.evalMessage(data.modeStorage, cache));
+        const info = parseInt(data.info);
+
+        let result;
         
         if (modeType === 0) {
             switch(info) {
@@ -210,7 +201,6 @@ module.exports = {
                 case 13:
                     result = date.format("DD/MM/YYYY HH:mm:ss");
                     break;
-                   default:
                }
           } else {
              result = date.format(buildInput);
