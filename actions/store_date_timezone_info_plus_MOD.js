@@ -1,7 +1,7 @@
 module.exports = {
 
    
-    name: "Store Date Info Plus",
+    name: "Store Date Timezone Info Plus",
     section: "Other Stuff",
     meta: {
         version: '2.1.4',
