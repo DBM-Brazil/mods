@@ -24,12 +24,12 @@ module.exports = {
   html(isEvent, data) {
     return `
     <div style="padding-top: 3px;">
-	  Texto original:
+	  <span class="dbminputlabel">Texto original</span>
 		  <textarea id="text" rows="5" placeholder="Insira o texto aqui..." style="width: 99%; font-family: monospace; white-space: nowrap;"></textarea>
 	  </div>
 	  <div>
 		  <div style="padding-top: 8px; width: 100%;">
-		  Substituir:<br>
+		  <span class="dbminputlabel">Substituir</span><br>
 			  <textarea id="text2" rows="1" class="round" style="width:100%;"></textarea>
 		  </div><div style=" padding-top: 8px; width: 100%;">
 			  Para isso:<br>
@@ -37,7 +37,7 @@ module.exports = {
 		  </div>
 	  </div>
 	  <div style="padding-top: 8px; width: 100%;">
-	  Modelo:<br>
+	  <span class="dbminputlabel">Modelo</span><br>
 	  <select id="info" class="round">
 		  <option value="0" selected>Substitua o primeiro resultado</option>
 		  <option value="1">Substitua todos os resultados</option>
@@ -45,13 +45,13 @@ module.exports = {
 	  </div>
 	  <div style="padding-top: 8px;">
 		  <div style="float: left; width: 35%;">
-		  Armazenar em:<br>
+		  <span class="dbminputlabel">Armazenar em</span><br>
 			  <select id="storage" class="round">
 				  ${data.variables[1]}
 			  </select>
 		  </div>
 		  <div id="varNameContainer" style="float: right; width: 60%;">
-			  Nome da variável:<br>
+			  <span class="dbminputlabel">Nome da variável</span><br>
 			  <input id="varName" class="round" type="text">
 		  </div>
 	  </div>`;
