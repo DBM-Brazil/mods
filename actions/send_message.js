@@ -108,7 +108,7 @@ module.exports = {
     return `
 <send-reply-target-input selectId="channel" variableInputId="varName"></send-reply-target-input>
 
-<br><br>
+<br><br><br>
 
 <tab-system style="margin-top: 20px;">
 
@@ -486,7 +486,6 @@ module.exports = {
       <br><br><br>
     </div>
   </tab>
-
 </tab-system>`;
   },
 
@@ -832,8 +831,7 @@ module.exports = {
       if (promise) {
         promise
           .then(onComplete)
-          .catch((err) => this.displayError(data, cache, err));
-          this.executeResults(false, data, cache);
+          .catch((err) => this.displayError(data, cache, err) || this.executeResults(false, data, cache));
       }
     }
 
@@ -841,16 +839,14 @@ module.exports = {
       target
         .edit(messageOptions)
         .then(onComplete)
-        .catch((err) => this.displayError(data, cache, err));
-        this.executeResults(false, data, cache);
+        .catch((err) => this.displayError(data, cache, err) || this.executeResults(false, data, cache));;
     }
 
     else if (isMessageTarget && target?.reply) {
       target
         .reply(messageOptions)
         .then(onComplete)
-        .catch((err) => this.displayError(data, cache, err));
-        this.executeResults(false, data, cache);
+        .catch((err) => this.displayError(data, cache, err) || this.executeResults(false, data, cache));
     }
 
     else if (data.reply === true && canReply) {
@@ -871,8 +867,7 @@ module.exports = {
       target
         .send(messageOptions)
         .then(onComplete)
-        .catch((err) => this.displayError(data, cache, err));
-        this.executeResults(false, data, cache);
+        .catch((err) => this.displayError(data, cache, err) || this.executeResults(false, data, cache));
     }
 
     else {
