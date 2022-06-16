@@ -12,7 +12,7 @@ module.exports = {
       },
     
     subtitle: function(data) {
-        const info = ['Número inteiro (Arredondado)', 'Número inteiro (Para cima)', 'Número inteiro (Para baixo)', 'Texto', 'Texto maiúsculo', 'Texto minúsculo', 'Texto sem espaços', 'Texto (Sem espaços de ambos os lados)', 'Número com pontuações' , 'Número resumido', 'Formato de dinheiro R$', 'Formato de dinheiro U$', 'Formato de dinheiro €', 'Texto sem acentos'];
+        const info = ['Número inteiro (Arredondado)', 'Número inteiro (Para cima)', 'Número inteiro (Para baixo)', 'Texto', 'Texto maiúsculo', 'Texto minúsculo', 'Texto sem espaços', 'Texto (Sem espaços de ambos os lados)', 'Número com pontuações' , 'Número resumido', 'Formato de dinheiro R$', 'Formato de dinheiro U$', 'Formato de dinheiro €', 'Texto sem acentos', 'Texto começando com a letra maiuscula'];
         const prse = parseInt(data.into);
         return `Converter "${data.vAria}" em ${info[prse]}`;
     },
@@ -22,7 +22,7 @@ module.exports = {
     variableStorage: function(data, varType) {
         const type = parseInt(data.storage);
         const prse2 = parseInt(data.into);
-        const info2 = ['Numero', 'Numero', 'Numero', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 'Numero', 'Numero', 'Dinheiro', 'Dinheiro', 'Dinheiro', 'Texto'];
+        const info2 = ['Numero', 'Numero', 'Numero', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 'Numero', 'Numero', 'Dinheiro', 'Dinheiro', 'Dinheiro', 'Texto', 'Texto'];
         if(type !== varType) return;
         return ([data.varName2, info2[prse2]]);
     },
@@ -55,6 +55,7 @@ module.exports = {
                     <option value="6">Texto sem espaços</option>
                     <option value="7">Texto (Sem espaços de ambos os lados)</option>
                     <option value="13">Texto sem acentos</option>
+                    <option value="14">Texto começando com a letra maiuscula</option>
             </select>
         </div><br>
         <div>
@@ -261,6 +262,10 @@ module.exports = {
                              result = result.replaceAll(acentos[i], acentosSubstituir[i]);
                          }
                         break;
+                        case 14:
+                            const convertor = theVar[0].toUpperCase() + theVar.substring(1);
+                            result = convertor;
+                            break;
         }
         if(result !== undefined) {
             const storage = parseInt(data.storage);
