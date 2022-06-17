@@ -44,6 +44,8 @@ module.exports = {
 			<option value="11">Termina com</option>
       <option value="15">Entre</option>
       <option value="16">Possui acentuações?</option>
+      <option value="17">Inclui as palavras  ["a" , "b" , "c"]</option>
+      <option value="18">E igual as palavras  ["a" , "b" , "c"]</option>
 		</select>
 	</div>
 	<table style="float: right;width: 65%;"><tr><td style="padding:0px 8px";><div style="width: 100%" id="directValue">
@@ -170,6 +172,14 @@ module.exports = {
           const conditions = ["á","à","â","ã","ä","å","æ","é","è","ê","ë","í","ì","î","ï","ó","ò","ô","õ","ö","ð","œ","ø","ú","ù","û","ü","µ","ç","¢","þ","Þ","ß","Ð","ñ","ƒ","§","ý","ÿ","ŕ","Á","À","Â","Ã","Ä","Å","Æ","É","È","Ê","Ë","Í","Ì","Î","Ï","Ó","Ò","Ô","Õ","Ö","Œ","Ø","Ú","Ù","Û","Ü","Ç","Ñ","Ƒ","Ý","Ÿ","Ŕ"]
           result = conditions.some(el => val1.includes(el));
           break;
+          case 17:
+          const conditionsX = val2
+          result = conditionsX.some(els => val1.includes(els));
+        break;
+        case 18:
+          const conditionsZ = val2
+          result = conditionsZ.some(elz => val1 == (elz));
+        break;
             
     }
 
