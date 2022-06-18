@@ -10,7 +10,7 @@ module.exports = {
   },
 
   subtitle(data) {
-    const storeTypes = ['', 'Temp Variable', 'Server Variable', 'Global Variable'];
+    const storeTypes = ['', 'Temp Variable', 'Server Variable', 'Global Variable', 'Command Params'];
     return `Convert Text ${storeTypes[parseInt(data.storage, 10)]} (${data.varName}) to List ${
       storeTypes[parseInt(data.storage2, 10)]
     } (${data.varName2})`;
@@ -26,16 +26,7 @@ module.exports = {
   html(isEvent, data) {
     return `
 <div>
-  <div style="float: left; width: 35%;">
-  <span class="dbminputlabel">Fonte do texto</span><br>
-    <select id="storage" class="round" onchange="glob.refreshVariableList(this)">
-      ${data.variables[1]}
-    </select><br>
-  </div>
-  <div id="varNameContainer" style="float: right; width: 60%;">
-  <span class="dbminputlabel">Nome da variave</span><br>
-    <input id="varName" class="round" type="text" list="variableList"><br>
-  </div>
+<retrieve-from-variable allowSlashParams dropdownLabel="Variavel" selectId="storage" variableContainerId="varNameContainer" variableInputId="varName"></retrieve-from-variable>
 </div><br><br><br>
 <div style="display: table; width: 105%;">
   <div style="display: table-cell;">
