@@ -39,7 +39,7 @@ module.exports = {
 				${data.variables[1]}
 			</select>
 		</div>
-		<div id="varNameContainer2" style="float: right; width: 60%;">
+		<div style="float: right; width: 60%;">
 		<span class="dbminputlabel">Nome da Variável</span><br>
 			<input id="varName" class="round" type="text">
 		</div>
