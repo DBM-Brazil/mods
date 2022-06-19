@@ -31,27 +31,27 @@ module.exports = {
 <br>
 <div style="float: left; width: 45%;">
 		<span class="dbminputlabel">Lista para substituições > de</span><br>
-			<select id="list" class="round" onchange="glob.refreshVariableList(this)">
+			<select id="list" class="round" onchange="glob.onComparisonChanged2(this)">
       ${data.lists[isEvent ? 1 : 0]}
-			</select><br>
+			</select>
 		</div>
-		<div id="varNameContainer" style=" float: right; width: 50%;">
+		<div id="varNameContainer2" style=" float: right; width: 50%;">
 		<span class="dbminputlabel">Nome da variável</span><br>
-			<input id="varName2" class="round" type="text" list="variableList"><br>
+			<input id="varName2" class="round" type="text" list="variableList">
 		</div>
-  
+    <br><br><br>
 
     <div style="float: left; width: 45%;">
 		<span class="dbminputlabel">Lista para substituições > para</span><br>
-			<select id="list2" class="round" onchange="glob.refreshVariableList(this)">
+			<select id="list2" class="round" onchange="glob.onComparisonChanged3(this)">
       ${data.lists[isEvent ? 1 : 0]}
-			</select><br>
+			</select>
 		</div>
-		<div id="varNameContainer" style=" float: right; width: 50%;">
+		<div id="varNameContainer3" style=" float: right; width: 50%;">
 		<span class="dbminputlabel">Nome da variável</span><br>
-			<input id="varName3" class="round" type="text" list="variableList"><br>
+			<input id="varName3" class="round" type="text" list="variableList">
 		</div>
-	  
+	  <br><br><br>
     
     <div style="padding-top: 12px; width: 100%;">
 	  <span class="dbminputlabel">Modelo</span><br>
@@ -76,7 +76,30 @@ module.exports = {
     <style>td{padding:5px;}</style>`;
   },
 
-  init() {},
+  init() {
+    const { glob, document } = this;
+  
+  glob.onComparisonChanged2 = function (event) {
+    if (event.value < "7") {
+      document.getElementById("varNameContainer2").style.display = "none";
+    } else {
+      document.getElementById("varNameContainer2").style.display = null;
+
+    }
+  };
+  glob.onComparisonChanged3 = function (event) {
+    if (event.value < "7") {
+      document.getElementById("varNameContainer3").style.display = "none";
+    } else {
+      document.getElementById("varNameContainer3").style.display = null;
+
+    }
+  };
+
+  glob.onComparisonChanged2(document.getElementById("list"));
+  glob.onComparisonChanged3(document.getElementById("list2"));
+
+},
 
   async action(cache) {
     const data = cache.actions[cache.index];
