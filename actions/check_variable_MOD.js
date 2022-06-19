@@ -14,7 +14,7 @@ module.exports = {
     return `${presets.getConditionsText(data)}`;
   },
 
-  fields: ["storage", "varName", "comparison", "value", "value2", "branch"],
+  fields: ["storage", "varName", "comparison", "value", "value2","list","varName2", "branch"],
 
 
   html(isEvent, data) {
@@ -46,24 +46,39 @@ module.exports = {
       <option value="16">Possui acentuações?</option>
       <option value="17">Inclui as palavras  ["a" , "b" , "c"]</option>
       <option value="18">E igual as palavras  ["a" , "b" , "c"]</option>
+      <option value="19">É igual os elementos da lista</option>
+      <option value="20">Inclui os elementos da lista</option>
 		</select>
 	</div>
-	<table style="float: right;width: 65%;"><tr><td style="padding:0px 8px";><div style="width: 100%" id="directValue">
+	<table style="float: right;width: 65%;"><tr><td style="padding:0px 8px"><div style="width: 100%" id="directValue">
 		<span class="dbminputlabel">Valor para comparar</span>
 		<input id="value" class="round" type="text">
 	</div></td><td style="padding:0px 3px";> <div style="width: 100%;" id="containerxin">
   <span class="dbminputlabel">e</span><br>
   <input id="value2" class="round" type="text"></td></tr></table>
-</div>
+</div></div>
+
+<div style="float: left; width: 100%;" id="containerxin2"><br>
+<div style="float: left; width: 35%;">
+		<span class="dbminputlabel">Lista</span><br>
+			<select id="list" class="round" onchange="glob.onComparisonChanged2(this)">
+      ${data.lists[isEvent ? 1 : 0]}
+			</select><br>
+		</div>
+		<div id="varNameContainer2" style=" float: right; width: 60%;">
+		<span class="dbminputlabel">Nome da variável</span><br>
+			<input id="varName2" class="round" type="text" list="variableList"><br>
+		</div>
 </div>
 
 <br><br><br><br>
 
+
 <hr class="subtlebar">
 
 <br>
-
-<conditional-input id="branch" style="padding-top: 8px;"></conditional-input>`;
+<div>
+<conditional-input id="branch" style="padding-top: 8px;"></conditional-input></div>`;
   },
 
 
@@ -80,34 +95,61 @@ module.exports = {
       if (event.value === "0") {
         document.getElementById("directValue").style.display = "none";
         document.getElementById("containerxin").style.display = "none";
+        document.getElementById("containerxin2").style.display = "none";
       } else {
         document.getElementById("directValue").style.display = null;
         document.getElementById("containerxin").style.display = "none";
+        document.getElementById("containerxin2").style.display = "none";
       }
       if (event.value === "15") {
         document.getElementById("directValue").style.display = null;
         document.getElementById("containerxin").style.display = null;
+        document.getElementById("containerxin2").style.display = "none";
       }
       if (event.value === "16") {
         document.getElementById("directValue").style.display = "none";
         document.getElementById("containerxin").style.display = "none";
+        document.getElementById("containerxin2").style.display = "none";
+      }
+      if (event.value === "19") {
+        document.getElementById("directValue").style.display = "none";
+        document.getElementById("containerxin").style.display = "none";
+        document.getElementById("containerxin2").style.display = null;
+      }
+      if (event.value === "20") {
+        document.getElementById("directValue").style.display = "none";
+        document.getElementById("containerxin").style.display = "none";
+        document.getElementById("containerxin2").style.display = null;
+      }
+    };
+
+
+    glob.onComparisonChanged2 = function (event) {
+      if (event.value < "7") {
+        document.getElementById("varNameContainer2").style.display = "none";
+      } else {
+        document.getElementById("varNameContainer2").style.display = null;
+
       }
     };
 
     glob.onComparisonChanged(document.getElementById("comparison"));
+    glob.onComparisonChanged2(document.getElementById("list"));
+  
 
 
 
   },
 
-  
 
-
-  action(cache) {
+  async action(cache) {
     const data = cache.actions[cache.index];
+    const storage2 = parseInt(data.list, 10);
     const type = parseInt(data.storage, 10);
     const varName = this.evalMessage(data.varName, cache);
     const variable = this.getVariable(type, varName, cache);
+    const varName2 = this.evalMessage(data.varName2, cache);
+    const list = await this.getList(storage2, varName2, cache);
     let result = false;
 
     const val1 = variable;
@@ -180,7 +222,13 @@ module.exports = {
           const conditionsZ = val2
           result = conditionsZ.some(elz => val1 == (elz));
         break;
-            
+        case 19:
+            result = list.toString().includes(val1);
+        break;
+        case 20:
+          const conditionslist = list
+          result = conditionslist.some(elx => val1.includes(elx));
+        break;
     }
 
     this.executeResults(result, data?.branch ?? data, cache);
