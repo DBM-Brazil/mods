@@ -46,8 +46,6 @@ module.exports = {
       <option value="16">Possui acentuações?</option>
       <option value="17">Inclui as palavras  ["a" , "b" , "c"]</option>
       <option value="18">E igual as palavras  ["a" , "b" , "c"]</option>
-      <option value="19">É igual os elementos da lista</option>
-      <option value="20">Inclui os elementos da lista</option>
 		</select>
 	</div>
 	<table style="float: right;width: 65%;"><tr><td style="padding:0px 8px";><div style="width: 100%" id="directValue">
