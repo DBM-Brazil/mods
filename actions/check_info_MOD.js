@@ -14,7 +14,7 @@ module.exports = {
     return `${presets.getConditionsText(data)}`;
   },
 
-  fields: ["storage", "comparison", "value", "value2", "list","varName2","branch"],
+  fields: ["storage", "comparison", "value", "value2", "branch"],
 
 
   html(isEvent, data) {
@@ -59,19 +59,6 @@ module.exports = {
 </div>
 </div>
 
-<div style="float: left; width: 100%;" id="containerxin2"><br>
-<div style="float: left; width: 35%;">
-		<span class="dbminputlabel">Lista</span><br>
-			<select id="list" class="round" onchange="glob.onComparisonChanged2(this)">
-      ${data.lists[isEvent ? 1 : 0]}
-			</select><br>
-		</div>
-		<div id="varNameContainer2" style=" float: right; width: 60%;">
-		<span class="dbminputlabel">Nome da variável</span><br>
-			<input id="varName2" class="round" type="text" list="variableList"><br>
-		</div>
-</div>
-
 <br><br><br><br>
 
 <hr class="subtlebar">
@@ -93,12 +80,10 @@ module.exports = {
     glob.onComparisonChanged = function (event) {
       if (event.value === "0") {
         document.getElementById("directValue").style.display = "none";
-        document.getElementById("containerxin").style.display = "none";
-        document.getElementById("containerxin2").style.display = "none";        
+        document.getElementById("containerxin").style.display = "none";   
       } else {
         document.getElementById("directValue").style.display = null;
         document.getElementById("containerxin").style.display = "none";
-        document.getElementById("containerxin2").style.display = "none";
       }
       if (event.value === "15") {
         document.getElementById("directValue").style.display = null;
@@ -108,34 +93,11 @@ module.exports = {
       if (event.value === "16") {
         document.getElementById("directValue").style.display = "none";
         document.getElementById("containerxin").style.display = "none";
-        document.getElementById("containerxin2").style.display = "none";
-      }
-      if (event.value === "19") {
-        document.getElementById("directValue").style.display = "none";
-        document.getElementById("containerxin").style.display = "none";
-        document.getElementById("containerxin2").style.display = null;
-      }
-      if (event.value === "20") {
-        document.getElementById("directValue").style.display = "none";
-        document.getElementById("containerxin").style.display = "none";
-        document.getElementById("containerxin2").style.display = null;
-      }
-    };
-
-     glob.onComparisonChanged2 = function (event) {
-      if (event.value < "7") {
-        document.getElementById("varNameContainer2").style.display = "none";
-      } else {
-        document.getElementById("varNameContainer2").style.display = null;
-
       }
     };
 
 
     glob.onComparisonChanged(document.getElementById("comparison"));
-    glob.onComparisonChanged2(document.getElementById("list"));
-
-
 
 
   },
@@ -143,16 +105,13 @@ module.exports = {
   
 
 
-  async action(cache) {
+  action(cache) {
     const data = cache.actions[cache.index];
-    const storage2 = parseInt(data.list, 10);
     const val1 = this.evalMessage(data.storage, cache);
     let result = false;
     const compare = parseInt(data.comparison, 10);
     let val2 = data.value;
     let val3 = data.value2;
-    const varName2 = this.evalMessage(data.varName2, cache);
-    const list = await this.getList(storage2, varName2, cache);
     if (compare !== 6) val2 = this.evalIfPossible(val2, cache);
     switch (compare) {
       case 0:
@@ -219,13 +178,6 @@ module.exports = {
             const conditionsZ = val2
             result = conditionsZ.some(elz => val1 == (elz));
           break;
-          case 19:
-            result = list.toString().includes(val1);
-        break;
-        case 20:
-          const conditionslist = list
-          result = conditionslist.some(elx => val1.includes(elx));
-        break;
     }
 
     this.executeResults(result, data?.branch ?? data, cache);
