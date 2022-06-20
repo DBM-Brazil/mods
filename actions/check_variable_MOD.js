@@ -3,7 +3,7 @@ module.exports = {
   name: "Check Variable",
   section: "Conditions",
   meta: {
-    version: '2.1.3',
+    version: '2.1.4',
     preciseCheck: true,
     author: '[XinXyla - 172782058396057602]',
     authorUrl: 'https://github.com/DBM-Brazil/mods',
@@ -14,7 +14,7 @@ module.exports = {
     return `${presets.getConditionsText(data)}`;
   },
 
-  fields: ["storage", "varName", "comparison", "value", "value2", "branch"],
+  fields: ["storage", "varName", "comparison", "value", "value2","branch"],
 
 
   html(isEvent, data) {
@@ -44,24 +44,26 @@ module.exports = {
 			<option value="11">Termina com</option>
       <option value="15">Entre</option>
       <option value="16">Possui acentuações?</option>
+      <option value="17">Inclui as palavras  ["a" , "b" , "c"]</option>
+      <option value="18">E igual as palavras  ["a" , "b" , "c"]</option>
 		</select>
 	</div>
-	<table style="float: right;width: 65%;"><tr><td style="padding:0px 8px";><div style="width: 100%" id="directValue">
+	<table style="float: right;width: 65%;"><tr><td style="padding:0px 8px"><div style="width: 100%" id="directValue">
 		<span class="dbminputlabel">Valor para comparar</span>
-		<input id="value" class="round" type="text" name="is-eval">
+		<input id="value" class="round" type="text">
 	</div></td><td style="padding:0px 3px";> <div style="width: 100%;" id="containerxin">
   <span class="dbminputlabel">e</span><br>
-  <input id="value2" class="round" type="text" name="is-eval"></td></tr></table>
-</div>
-</div>
+  <input id="value2" class="round" type="text"></td></tr></table>
+</div></div>
 
 <br><br><br><br>
+
 
 <hr class="subtlebar">
 
 <br>
-
-<conditional-input id="branch" style="padding-top: 8px;"></conditional-input>`;
+<div>
+<conditional-input id="branch" style="padding-top: 8px;"></conditional-input></div>`;
   },
 
 
@@ -93,12 +95,12 @@ module.exports = {
     };
 
     glob.onComparisonChanged(document.getElementById("comparison"));
+    glob.onComparisonChanged2(document.getElementById("list"));
+  
 
 
 
   },
-
-  
 
 
   action(cache) {
@@ -110,8 +112,8 @@ module.exports = {
 
     const val1 = variable;
     const compare = parseInt(data.comparison, 10);
-    let val2 = data.value;
-    let val3 = data.value2;
+    let val2 = this.evalMessage(data.value, cache);
+    let val3 = this.evalMessage(data.value2, cache);
     if (compare !== 6) val2 = this.evalIfPossible(val2, cache);
     switch (compare) {
       case 0:
@@ -170,7 +172,14 @@ module.exports = {
           const conditions = ["Ä","Å","Á","Â","À","Ã","Ā","Ă","Ą","ā","ă","ą","ä","á","â","à","ã","É","Ê","Ë","È","Ė","Ę","Ě","Ĕ","Ē","ė","ę","ě","ĕ","ē","é","ê","ë","è","Í","Î","Ï","Ì","İ","Į","Ī","ı","į","ī","í","î","ï","ì","Ö","Ó","Ô","Ò","Õ","Ő","Ō","ő","ō","ö","ó","ô","ò","õ","Ü","Ú","Û","Ų","Ű","Ů","Ū","ų","ű","ů","ū","ü","ú","û","ù","Ç","Ć","Č","ç","ć","č","Ñ","Ň","Ņ","Ń","ñ","ň","ņ","ń","Ÿ","Ý","ý","Ź","Ż","Ž","ź","ż","ž","Ł","Ľ","Ļ","Ĺ","ł","ľ","ĺ","Ķ","ķ","Ģ","Ğ","ģ","ğ","Ď","ď","Ś","Š","Ş","ś","š","ş","Ť","Ț","Ţ","ť","ț","ţ","Ŕ","Ř","ŕ","ř"]
           result = conditions.some(el => val1.includes(el));
           break;
-            
+          case 17:
+          const conditionsX = val2
+          result = conditionsX.some(els => val1.includes(els));
+        break;
+        case 18:
+          const conditionsZ = val2
+          result = conditionsZ.some(elz => val1 == (elz));
+        break;
     }
 
     this.executeResults(result, data?.branch ?? data, cache);
