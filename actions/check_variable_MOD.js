@@ -95,7 +95,6 @@ module.exports = {
     };
 
     glob.onComparisonChanged(document.getElementById("comparison"));
-    glob.onComparisonChanged2(document.getElementById("list"));
   
 
 
