@@ -3,7 +3,7 @@ module.exports = {
   name: "Check Variable",
   section: "Conditions",
   meta: {
-    version: '2.1.4',
+    version: '2.1.3',
     preciseCheck: true,
     author: '[XinXyla - 172782058396057602]',
     authorUrl: 'https://github.com/DBM-Brazil/mods',
@@ -14,7 +14,7 @@ module.exports = {
     return `${presets.getConditionsText(data)}`;
   },
 
-  fields: ["storage", "varName", "comparison", "value", "value2","list","varName2", "branch"],
+  fields: ["storage", "varName", "comparison", "value", "value2", "branch"],
 
 
   html(isEvent, data) {
@@ -44,41 +44,24 @@ module.exports = {
 			<option value="11">Termina com</option>
       <option value="15">Entre</option>
       <option value="16">Possui acentuações?</option>
-      <option value="17">Inclui as palavras  ["a" , "b" , "c"]</option>
-      <option value="18">E igual as palavras  ["a" , "b" , "c"]</option>
-      <option value="19">É igual os elementos da lista</option>
-      <option value="20">Inclui os elementos da lista</option>
 		</select>
 	</div>
-	<table style="float: right;width: 65%;"><tr><td style="padding:0px 8px"><div style="width: 100%" id="directValue">
+	<table style="float: right;width: 65%;"><tr><td style="padding:0px 8px";><div style="width: 100%" id="directValue">
 		<span class="dbminputlabel">Valor para comparar</span>
-		<input id="value" class="round" type="text">
+		<input id="value" class="round" type="text" name="is-eval">
 	</div></td><td style="padding:0px 3px";> <div style="width: 100%;" id="containerxin">
   <span class="dbminputlabel">e</span><br>
-  <input id="value2" class="round" type="text"></td></tr></table>
-</div></div>
-
-<div style="float: left; width: 100%;" id="containerxin2"><br>
-<div style="float: left; width: 35%;">
-		<span class="dbminputlabel">Lista</span><br>
-			<select id="list" class="round" onchange="glob.onComparisonChanged2(this)">
-      ${data.lists[isEvent ? 1 : 0]}
-			</select><br>
-		</div>
-		<div id="varNameContainer2" style=" float: right; width: 60%;">
-		<span class="dbminputlabel">Nome da variável</span><br>
-			<input id="varName2" class="round" type="text" list="variableList"><br>
-		</div>
+  <input id="value2" class="round" type="text" name="is-eval"></td></tr></table>
+</div>
 </div>
 
 <br><br><br><br>
 
-
 <hr class="subtlebar">
 
 <br>
-<div>
-<conditional-input id="branch" style="padding-top: 8px;"></conditional-input></div>`;
+
+<conditional-input id="branch" style="padding-top: 8px;"></conditional-input>`;
   },
 
 
@@ -95,67 +78,40 @@ module.exports = {
       if (event.value === "0") {
         document.getElementById("directValue").style.display = "none";
         document.getElementById("containerxin").style.display = "none";
-        document.getElementById("containerxin2").style.display = "none";
       } else {
         document.getElementById("directValue").style.display = null;
         document.getElementById("containerxin").style.display = "none";
-        document.getElementById("containerxin2").style.display = "none";
       }
       if (event.value === "15") {
         document.getElementById("directValue").style.display = null;
         document.getElementById("containerxin").style.display = null;
-        document.getElementById("containerxin2").style.display = "none";
       }
       if (event.value === "16") {
         document.getElementById("directValue").style.display = "none";
         document.getElementById("containerxin").style.display = "none";
-        document.getElementById("containerxin2").style.display = "none";
-      }
-      if (event.value === "19") {
-        document.getElementById("directValue").style.display = "none";
-        document.getElementById("containerxin").style.display = "none";
-        document.getElementById("containerxin2").style.display = null;
-      }
-      if (event.value === "20") {
-        document.getElementById("directValue").style.display = "none";
-        document.getElementById("containerxin").style.display = "none";
-        document.getElementById("containerxin2").style.display = null;
-      }
-    };
-
-
-    glob.onComparisonChanged2 = function (event) {
-      if (event.value < "7") {
-        document.getElementById("varNameContainer2").style.display = "none";
-      } else {
-        document.getElementById("varNameContainer2").style.display = null;
-
       }
     };
 
     glob.onComparisonChanged(document.getElementById("comparison"));
-    glob.onComparisonChanged2(document.getElementById("list"));
-  
 
 
 
   },
 
+  
 
-  async action(cache) {
+
+  action(cache) {
     const data = cache.actions[cache.index];
-    const storage2 = parseInt(data.list, 10);
     const type = parseInt(data.storage, 10);
     const varName = this.evalMessage(data.varName, cache);
     const variable = this.getVariable(type, varName, cache);
-    const varName2 = this.evalMessage(data.varName2, cache);
-    const list = await this.getList(storage2, varName2, cache);
     let result = false;
 
     const val1 = variable;
     const compare = parseInt(data.comparison, 10);
-    let val2 = this.evalMessage(data.value, cache);
-    let val3 = this.evalMessage(data.value2, cache);
+    let val2 = data.value;
+    let val3 = data.value2;
     if (compare !== 6) val2 = this.evalIfPossible(val2, cache);
     switch (compare) {
       case 0:
@@ -214,21 +170,7 @@ module.exports = {
           const conditions = ["Ä","Å","Á","Â","À","Ã","Ā","Ă","Ą","ā","ă","ą","ä","á","â","à","ã","É","Ê","Ë","È","Ė","Ę","Ě","Ĕ","Ē","ė","ę","ě","ĕ","ē","é","ê","ë","è","Í","Î","Ï","Ì","İ","Į","Ī","ı","į","ī","í","î","ï","ì","Ö","Ó","Ô","Ò","Õ","Ő","Ō","ő","ō","ö","ó","ô","ò","õ","Ü","Ú","Û","Ų","Ű","Ů","Ū","ų","ű","ů","ū","ü","ú","û","ù","Ç","Ć","Č","ç","ć","č","Ñ","Ň","Ņ","Ń","ñ","ň","ņ","ń","Ÿ","Ý","ý","Ź","Ż","Ž","ź","ż","ž","Ł","Ľ","Ļ","Ĺ","ł","ľ","ĺ","Ķ","ķ","Ģ","Ğ","ģ","ğ","Ď","ď","Ś","Š","Ş","ś","š","ş","Ť","Ț","Ţ","ť","ț","ţ","Ŕ","Ř","ŕ","ř"]
           result = conditions.some(el => val1.includes(el));
           break;
-          case 17:
-          const conditionsX = val2
-          result = conditionsX.some(els => val1.includes(els));
-        break;
-        case 18:
-          const conditionsZ = val2
-          result = conditionsZ.some(elz => val1 == (elz));
-        break;
-        case 19:
-            result = list.toString().includes(val1);
-        break;
-        case 20:
-          const conditionslist = list
-          result = conditionslist.some(elx => val1.includes(elx));
-        break;
+            
     }
 
     this.executeResults(result, data?.branch ?? data, cache);
