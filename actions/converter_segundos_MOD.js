@@ -2,8 +2,8 @@ module.exports = {
 name: "Converter segundos em A/D/H/M/S",
 section: "Other Stuff",
 meta: {
-    version: '2.1.4',
-    preciseCheck: false,
+    version: '2.1.5',
+    preciseCheck: true,
     author: '[XinXyla - 172782058396057602]',
 	short_description: "Converter segundos em anos, meses, dias, horas, minutos e segundos.",
     authorUrl: 'https://github.com/DBM-Brazil/mods',

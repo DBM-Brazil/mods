@@ -4,7 +4,7 @@ module.exports = {
   name: "Set Role Channel Multi Perms",
   section: "Channel Control",
   meta: {
-    version: '2.1.4',
+    version: '2.1.5',
     preciseCheck: true,
     author: '[XinXyla - 172782058396057602]',
     authorUrl: 'https://github.com/DBM-Brazil/mods',

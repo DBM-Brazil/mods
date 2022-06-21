@@ -4,7 +4,7 @@ module.exports = {
     section: 'Other Stuff',
     meta: {
       version: '2.1.5',
-      preciseCheck: false,
+      preciseCheck: true,
       author: '[Tempest - 321400509326032897]',
       authorUrl: 'https://github.com/DBM-Brazil/mods',
       downloadURL: 'https://github.com/DBM-Brazil/mods',

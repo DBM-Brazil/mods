@@ -5,7 +5,7 @@ module.exports = {
   section: "Role Control",
   meta: {
     version: '2.1.4',
-    preciseCheck: false,
+    preciseCheck: true,
     author: '[XinXyla - 172782058396057602]',
     authorUrl: 'https://github.com/DBM-Brazil/mods',
     downloadURL: 'https://github.com/DBM-Brazil/mods',

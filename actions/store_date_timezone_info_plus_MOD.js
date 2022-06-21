@@ -4,8 +4,8 @@ module.exports = {
     name: "Store Date Timezone Info Plus",
     section: "Other Stuff",
     meta: {
-        version: '2.1.4',
-        preciseCheck: false,
+        version: '2.1.5',
+        preciseCheck: true,
         author: '[XinXyla - 172782058396057602]<br>[Tempest - 321400509326032897]',
         authorUrl: 'https://github.com/DBM-Brazil/mods',
         downloadURL: 'https://github.com/DBM-Brazil/mods',

@@ -2,8 +2,8 @@ module.exports = {
   name: 'Convert Text to List',
   section: 'Lists and Loops',
   meta: {
-    version: '2.1.4',
-    preciseCheck: false,
+    version: '2.1.5',
+    preciseCheck: true,
     author: '[XinXyla - 172782058396057602]',
     authorUrl: 'https://github.com/DBM-Brazil/mods',
     downloadURL: 'https://github.com/DBM-Brazil/mods',
