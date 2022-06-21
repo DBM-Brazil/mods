@@ -3,8 +3,8 @@ module.exports = {
   name: "Check Variable Using Lists",
   section: "Conditions",
   meta: {
-    version: '2.1.4',
-    preciseCheck: true,
+    version: '2.1.5',
+    preciseCheck: false,
     author: '[XinXyla - 172782058396057602]',
     authorUrl: 'https://github.com/DBM-Brazil/mods',
     downloadURL: 'https://github.com/DBM-Brazil/mods',
