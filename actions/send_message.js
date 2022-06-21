@@ -33,7 +33,9 @@ module.exports = {
       text = `${data.buttons.length} Buttons and ${data.selectMenus.length} Select Menus`;
     } else if (data.editMessage && data.editMessage !== "0") {
       text = `Message Options - ${presets.getVariableText(data.editMessage, data.editMessageVarName)}`;
-    } 
+    } else {
+      text = `Nothing (might cause error)`;
+    }
     if (data.dontSend) {
       return `Store Data: ${text}`;
     }
@@ -62,7 +64,7 @@ module.exports = {
   // This will make it so the patch version (0.0.X) is not checked.
   //---------------------------------------------------------------------
 
-  meta: { version: "2.1.4", preciseCheck: true, author: null, authorUrl: null, downloadUrl: null },
+  meta: { version: "2.1.5", preciseCheck: true, author: null, authorUrl: null, downloadUrl: null },
 
   //---------------------------------------------------------------------
   // Action Fields
@@ -89,8 +91,6 @@ module.exports = {
     "editMessageVarName",
     "storage",
     "varName2",
-    "iffalse",
-    "iffalseVal",
   ],
 
   //---------------------------------------------------------------------
@@ -454,7 +454,9 @@ module.exports = {
         <dbm-checkbox id="dontSend" label="Don't Send Message"></dbm-checkbox>
       </div>
 
- 
+      <br>
+
+      <hr class="subtlebar" style="margin-top: 4px; margin-bottom: 4px;">
 
       <br>
 
@@ -470,20 +472,9 @@ module.exports = {
         <store-in-variable allowNone selectId="storage" variableInputId="varName2" variableContainerId="varNameContainer2"></store-in-variable>
       </div>
 
-      <br><br><br>
-      <div>
-      <div style="float: left; width: 35%;">
-      <span class="dbminputlabel">If Message Delivery Fails</span><br>
-      <select id="iffalse" class="round" onchange="glob.onComparisonChanged(this)">
-      <option value="0">Continue Actions</option>
-      <option value="1" selected>Stop Action Sequence</option>
-      <option value="2">Jump to action</option>
-      <option value="3">Skip Next Actions</option>
-      <option value="4">Go to Action Anchor</option>
-    </select>
-    </div>
-    <div id="iffalseContainer" style="display: none; float: right; width: 60%;"><span id="ifName" class="dbminputlabel">For</span><br><input id="iffalseVal" class="round" type="text"></div>
-      <br><br><br>
+      <br><br>
+
+      <div></div>
     </div>
   </tab>
 </tab-system>`;
@@ -497,19 +488,8 @@ module.exports = {
   // functions for the DOM elements.
   //---------------------------------------------------------------------
 
-  init: function() {
-    const {glob, document} = this;
-  
+  init() {},
 
-    glob.onComparisonChanged = function (event) {
-      if (event.value > "1") {
-        document.getElementById("iffalseContainer").style.display = null;
-      } else {
-        document.getElementById("iffalseContainer").style.display = "none";
-      }}
-      glob.onComparisonChanged(document.getElementById("iffalse"));
-
-  },
   //---------------------------------------------------------------------
   // Action Editor On Save
   //
@@ -616,7 +596,7 @@ module.exports = {
     }
 
 
-    const content = this.evalMessage(message|| '\u200B', cache);
+    const content = this.evalMessage(message, cache);
     if (content) {
       if (messageOptions.content && !overwrite) {
         messageOptions.content += content;
@@ -644,13 +624,13 @@ module.exports = {
         if (embedData.imageUrl) embed.setImage(this.evalMessage(embedData.imageUrl, cache));
         if (embedData.thumbUrl) embed.setThumbnail(this.evalMessage(embedData.thumbUrl, cache));
 
-        if (embedData.description) embed.setDescription(this.evalMessage(embedData.description || '\u200B', cache));
+        if (embedData.description) embed.setDescription(this.evalMessage(embedData.description, cache));
 
         if (embedData.fields?.length > 0) {
           const fields = embedData.fields;
           for (let i = 0; i < fields.length; i++) {
             const f = fields[i];
-            embed.addField(this.evalMessage(f.name || '\u200B', cache), this.evalMessage(f.value || '\u200B', cache), f.inline === "true");
+            embed.addField(this.evalMessage(f.name, cache), this.evalMessage(f.value, cache), f.inline === "true");
           }
         }
 
@@ -817,21 +797,23 @@ module.exports = {
       this.callListFunc(target, "send", [messageOptions]).then(onComplete);
     }
 
-    else if (isEdit === 2 && cache?.interaction?.update) {
+    else if (isEdit === 2) {
       let promise = null;
 
       defaultResultMsg = cache.interaction?.message;
 
       if (cache.interaction?.replied && cache.interaction?.editReply) {
         promise = cache.interaction.editReply(messageOptions);
-      } else {
+      } else if(cache?.interaction?.update) {
         promise = cache.interaction.update(messageOptions);
+      } else {
+        this.displayError(data, cache, "Send Message -> Message/Options to Edit -> Interaction Update / Could not find interaction to edit");
       }
       
       if (promise) {
         promise
           .then(onComplete)
-          .catch((err) => this.displayError(data, cache, err) || this.executeResults(false, data, cache));
+          .catch((err) => this.displayError(data, cache, err));
       }
     }
 
@@ -839,14 +821,14 @@ module.exports = {
       target
         .edit(messageOptions)
         .then(onComplete)
-        .catch((err) => this.displayError(data, cache, err) || this.executeResults(false, data, cache));;
+        .catch((err) => this.displayError(data, cache, err));
     }
 
     else if (isMessageTarget && target?.reply) {
       target
         .reply(messageOptions)
         .then(onComplete)
-        .catch((err) => this.displayError(data, cache, err) || this.executeResults(false, data, cache));
+        .catch((err) => this.displayError(data, cache, err));
     }
 
     else if (data.reply === true && canReply) {
@@ -867,7 +849,7 @@ module.exports = {
       target
         .send(messageOptions)
         .then(onComplete)
-        .catch((err) => this.displayError(data, cache, err) || this.executeResults(false, data, cache));
+        .catch((err) => this.displayError(data, cache, err));
     }
 
     else {
