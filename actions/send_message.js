@@ -536,21 +536,7 @@ module.exports = {
         document.getElementById("iffalseContainer").style.display = "none";
       }}
 
-      glob.onComparisonChanged2 = function (event) {
-        if (event.value == "0") {
-          document.querySelector("[name='actionxinxyla']").type = "text"
-        } else {
-          document.querySelector("[name='actionxinxyla']").type = "color"
-        }
-        if (event.value == "1") {
-          document.querySelector("[name='actionxinxyla']").type = "color"
-        } else {
-          document.querySelector("[name='actionxinxyla']").type = "text"
-        }
-      }
-
       glob.onComparisonChanged(document.getElementById("iffalse"));
-     glob.onComparisonChanged2(document.getElementById("menucolor"));
   },
   //---------------------------------------------------------------------
   // Action Editor On Save
