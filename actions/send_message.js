@@ -39,7 +39,9 @@ module.exports = {
     if (data.dontSend) {
       return `Store Data: ${text}`;
     }
-    return `${presets.getSendReplyTargetText(data.channel, data.varName)}: ${text}`;
+    return data.description
+    ? `<font color="${data.descriptioncolor}">${data.description}</font>`
+    : `<font color="${data.descriptioncolor}">${presets.getSendReplyTargetText(data.channel, data.varName)}: ${text}</font>`
   },
 
   //---------------------------------------------------------------------
@@ -93,6 +95,9 @@ module.exports = {
     "varName2",
     "iffalse",
     "iffalseVal",
+    "branch",
+    "descriptioncolor",
+    "description",
   ],
 
   //---------------------------------------------------------------------
@@ -139,8 +144,19 @@ module.exports = {
                   <br>
 
                   <span class="dbminputlabel">Color</span><br>
-                  <input id="color" class="round" type="text" placeholder="Leave blank for default...">
+                  <table style="width:100%"><tr><td><input id="color" name="actionxinxyla" class="round" type="text" placeholder="Leave blank for default..."><td>
+                  <td style="width:40px;text-align:center;padding:4px"><a id="btr1" style="cursor:pointer" onclick="(function(){
+                    document.getElementById('color').type = 'color'
+                    document.getElementById('btr1').style.display = 'none';
+                    document.getElementById('btr2').style.display = 'block';
+                    })()"><button class="tiny compact ui icon button">Color</button></a><a id="btr2" style="cursor:pointer;display:none" onclick="(function(){
+                      document.getElementById('color').type = 'text';
+                      document.getElementById('btr1').style.display = 'block';
+                      document.getElementById('btr2').style.display = 'none';
+                      })()"><button class="tiny compact ui icon button">Text</button></a><td></tr></table>
                 </div>
+                
+                
 
                 <div style="float: right; width: calc(50% - 12px);">
                   <span class="dbminputlabel">URL</span><br>
@@ -474,8 +490,10 @@ module.exports = {
       </div>
 
       <br><br><br>
+      <hr class="subtlebar" style="margin-top: 4px; margin-bottom: 4px;">
+      <br>
       <div>
-      <div style="float: left; width: 35%;">
+      <div style="float: left; width: 35%">
       <span class="dbminputlabel">If Message Delivery Fails</span><br>
       <select id="iffalse" class="round" onchange="glob.onComparisonChanged(this)">
       <option value="0">Continue Actions</option>
@@ -485,8 +503,16 @@ module.exports = {
       <option value="4">Go to Action Anchor</option>
     </select>
     </div>
-    <div id="iffalseContainer" style="display: none; float: right; width: 60%;"><span id="ifName" class="dbminputlabel">For</span><br><input id="iffalseVal" class="round" type="text"></div>
+    <div id="iffalseContainer" style="display: none; float: right; width: 60%;"><span id="ifName" class="dbminputlabel">For</span><br><input id="iffalseVal" class="round" name="actionxinxyla" type="text"></div>
       <br><br><br>
+
+      <div style="padding-bottom: 12px;padding-top: 12px">
+      <table style="width:100%;"><tr>
+      <td><span class="dbminputlabel">Description</span><br><input type="text" class="round" id="description" placeholder="Leave empty to remove"></td>
+      <td style="padding:0px 0px 0px 10px;width:55px"><span class="dbminputlabel">Color</span><br><input type="color" value="#ffffff" class="round" id="descriptioncolor"></td>
+      </tr></table>
+      </div>
+
     </div>
   </tab>
 </tab-system>`;
@@ -510,8 +536,22 @@ module.exports = {
       } else {
         document.getElementById("iffalseContainer").style.display = "none";
       }}
-      glob.onComparisonChanged(document.getElementById("iffalse"));
 
+      glob.onComparisonChanged2 = function (event) {
+        if (event.value == "0") {
+          document.querySelector("[name='actionxinxyla']").type = "text"
+        } else {
+          document.querySelector("[name='actionxinxyla']").type = "color"
+        }
+        if (event.value == "1") {
+          document.querySelector("[name='actionxinxyla']").type = "color"
+        } else {
+          document.querySelector("[name='actionxinxyla']").type = "text"
+        }
+      }
+
+      glob.onComparisonChanged(document.getElementById("iffalse"));
+     glob.onComparisonChanged2(document.getElementById("menucolor"));
   },
   //---------------------------------------------------------------------
   // Action Editor On Save
@@ -584,6 +624,7 @@ module.exports = {
   //---------------------------------------------------------------------
 
   async action(cache) {
+    
     const data = cache.actions[cache.index];
 
     const channel = parseInt(data.channel, 10);
