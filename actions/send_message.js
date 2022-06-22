@@ -95,7 +95,6 @@ module.exports = {
     "varName2",
     "iffalse",
     "iffalseVal",
-    "branch",
     "descriptioncolor",
     "description",
   ],
