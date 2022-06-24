@@ -49,6 +49,7 @@ module.exports = {
       "Nome do Field da embed",
       "Valor do Field da embed",
       "Inline do Field da embed",
+      "Quantidade de Embeds",
     ];
     return `${presets.getMessageText(data.message, data.varName)} - ${info[parseInt(data.info, 10)]}`;
   },
@@ -161,6 +162,9 @@ module.exports = {
                                     case 37:
                                       dataType = "Embed Message";
                                       break;
+                                      case 38:
+                                        dataType = "Embeds Number";
+                                        break;
     }
     return [data.varName2, dataType];
   },
@@ -198,6 +202,7 @@ module.exports = {
     <option value="19">Servidor da mensagem</option>
 		<option value="20">Tipo de mensagem</option>
 		<option value="21">ID do webhook da mensagem</option>
+    <option value="38">Quantidade de Embeds</options>
 		<option value="22">Objeto Embed da mensagem</option>
     <optgroup label="Informações da Embed">
     <option value="23">Titulo da embed</options>
@@ -248,6 +253,10 @@ module.exports = {
         document.getElementById("containerxin").style.display = "none";
       } else {
         document.getElementById("containerxin").style.display = "block";
+      }
+      if (event.value == 38) {
+        document.getElementById("containerxin").style.display = "none";
+        document.getElementById("containerxin2").style.display = "none";
       }
     };
 
@@ -336,53 +345,119 @@ module.exports = {
         result = msg.webhookId;
         break;
       case 22:
-        result = msg.embeds[embednumero];
-        break;
+        if(msg.embeds.length <= embednumero) {
+          result = undefined;
+        } else {
+        result = msg.embeds[embednumero];}
+      break;        
         case 23:
-          result = msg.embeds[embednumero].title;
+          if(msg.embeds.length <= embednumero) {
+            result = "";
+          } else {
+          result = msg.embeds[embednumero].title;}
         break;
         case 24:
-          result = msg.embeds[embednumero].description;
+          if(msg.embeds.length <= embednumero) {
+            result = "";
+          } else {
+          result = msg.embeds[embednumero].description;}
         break;
         case 25:
-          result = msg.embeds[embednumero].url;
+          if(msg.embeds.length <= embednumero) {
+            result = "";
+          } else {
+          result = msg.embeds[embednumero].url;}
         break;
         case 26:
-          result = msg.embeds[embednumero].color;
+          if(msg.embeds.length <= embednumero) {
+            result = "";
+          } else {
+          result = msg.embeds[embednumero].color;}
         break;
         case 27:
-          result = msg.embeds[embednumero].timestamp;
+          if(msg.embeds.length <= embednumero) {
+            result = "";
+          } else {
+          result = msg.embeds[embednumero].timestamp;}
         break;
         case 28:
-          result = msg.embeds[embednumero].thumbnail.url;
+          if(msg.embeds.length <= embednumero) {
+            result = "";
+          } else {
+          result = msg.embeds[embednumero].thumbnail.url;}
         break;
         case 29:
-          result = msg.embeds[embednumero].image.url;
+          if(msg.embeds.length <= embednumero) {
+            result = "";
+          } else {
+          result = msg.embeds[embednumero].image.url;}
         break;
         case 30:
-          result = msg.embeds[embednumero].author.name;
+          if(msg.embeds.length <= embednumero) {
+            result = "";
+          } else {
+          result = msg.embeds[embednumero].author.name;}
         break;
         case 31:
-          result = msg.embeds[embednumero].author.iconURL;
+          if(msg.embeds.length <= embednumero) {
+            result = "";
+          } else {
+          result = msg.embeds[embednumero].author.iconURL;}
         break;
         case 32:
-          result = msg.embeds[embednumero].author.url;
+          if(msg.embeds.length <= embednumero) {
+            result = "";
+          } else {
+          result = msg.embeds[embednumero].author.url;}
         break;
         case 33:
-          result = msg.embeds[embednumero].footer.text;
+          if(msg.embeds.length <= embednumero) {
+            result = "";
+          } else {
+          result = msg.embeds[embednumero].footer.text;}
         break;
         case 34:
-          result = msg.embeds[embednumero].footer.iconURL;
+          if(msg.embeds.length <= embednumero) {
+            result = "";
+          } else {
+          result = msg.embeds[embednumero].footer.iconURL;}
         break;
         case 35:
-          result = msg.embeds[embednumero].fields[field].name;;
+          if(msg.embeds.length <= embednumero) {
+            result = "";
+          } else {
+            if(msg.embeds[embednumero].fields.length <= field) {
+            result = "";}
+           else {
+          result = msg.embeds[embednumero].fields[field].name;}
+        }
         break;
         case 36:
-          result = msg.embeds[embednumero].fields[field].value;
+          if(msg.embeds.length <= embednumero) {
+            result = "";
+          } else {
+            if(msg.embeds[embednumero].fields.length <= field) {
+            result = "";}
+           else {
+          result = msg.embeds[embednumero].fields[field].value;}
+        }
         break;
         case 37:
-          result = msg.embeds[embednumero].fields[field].inline;
+          if(msg.embeds.length <= embednumero) {
+            result = "";
+          } else {
+            if(msg.embeds[embednumero].fields.length <= field) {
+            result = "";}
+           else {
+          result = msg.embeds[embednumero].fields[field].inline;}
+        }
         break;
+        case 38:
+          if(msg.embeds.length == undefined) {
+            result = 0;
+          } else {
+          result = msg.embeds.length;}
+        break;     
       default:
         break;
     } 
