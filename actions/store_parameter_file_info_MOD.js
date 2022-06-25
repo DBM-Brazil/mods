@@ -84,32 +84,56 @@ module.exports = {
     const interaction = cache.interaction;
     const parametro = this.evalMessage(data.parametro, cache);
     const info = parseInt(data.info, 10);
-
+  
     let result;
     switch (info) {
       case 0:
-        result = interaction.options._hoistedOptions.find((f) => f.type === "ATTACHMENT" && f.name === parametro).attachment;
+        if(interaction.options._hoistedOptions.find((f) => f.type === "ATTACHMENT" && f.name === parametro) == undefined) {
+          result = null
+        } else {
+        result = interaction.options._hoistedOptions.find((f) => f.type === "ATTACHMENT" && f.name === parametro).attachment}
         break;
       case 1:
-        result = interaction.options._hoistedOptions.find((f) => f.type === "ATTACHMENT" && f.name === parametro).attachment.id;
+        if(interaction.options._hoistedOptions.find((f) => f.type === "ATTACHMENT" && f.name === parametro) == undefined) {
+          result = null
+        } else {
+        result = interaction.options._hoistedOptions.find((f) => f.type === "ATTACHMENT" && f.name === parametro).attachment.id;}
         break;
       case 2:
-        result = interaction.options._hoistedOptions.find((f) => f.type === "ATTACHMENT" && f.name === parametro).attachment.attachment;
+        if(interaction.options._hoistedOptions.find((f) => f.type === "ATTACHMENT" && f.name === parametro) == undefined) {
+          result = null
+        } else {
+        result = interaction.options._hoistedOptions.find((f) => f.type === "ATTACHMENT" && f.name === parametro).attachment.attachment;}
         break;
       case 3:
-        result = interaction.options._hoistedOptions.find((f) => f.type === "ATTACHMENT" && f.name === parametro).attachment.name;
+        if(interaction.options._hoistedOptions.find((f) => f.type === "ATTACHMENT" && f.name === parametro) == undefined) {
+          result = null
+        } else {
+        result = interaction.options._hoistedOptions.find((f) => f.type === "ATTACHMENT" && f.name === parametro).attachment.name;}
         break;
       case 4:
-        result = interaction.options._hoistedOptions.find((f) => f.type === "ATTACHMENT" && f.name === parametro).attachment.size;
+        if(interaction.options._hoistedOptions.find((f) => f.type === "ATTACHMENT" && f.name === parametro) == undefined) {
+          result = 0
+        } else {
+        result = interaction.options._hoistedOptions.find((f) => f.type === "ATTACHMENT" && f.name === parametro).attachment.size;}
         break;
       case 5:
-        result = interaction.options._hoistedOptions.find((f) => f.type === "ATTACHMENT" && f.name === parametro).attachment.contentType;
+        if(interaction.options._hoistedOptions.find((f) => f.type === "ATTACHMENT" && f.name === parametro) == undefined) {
+          result = null
+        } else {
+        result = interaction.options._hoistedOptions.find((f) => f.type === "ATTACHMENT" && f.name === parametro).attachment.contentType;}
         break;
         case 6:
-        result = interaction.options._hoistedOptions.find((f) => f.type === "ATTACHMENT" && f.name === parametro).attachment.width;
+          if(interaction.options._hoistedOptions.find((f) => f.type === "ATTACHMENT" && f.name === parametro) == undefined) {
+            result = 0
+          } else {
+        result = interaction.options._hoistedOptions.find((f) => f.type === "ATTACHMENT" && f.name === parametro).attachment.width;}
         break;
         case 7:
-        result = interaction.options._hoistedOptions.find((f) => f.type === "ATTACHMENT" && f.name === parametro).attachment.height;
+          if(interaction.options._hoistedOptions.find((f) => f.type === "ATTACHMENT" && f.name === parametro) == undefined) {
+            result = 0
+          } else {
+        result = interaction.options._hoistedOptions.find((f) => f.type === "ATTACHMENT" && f.name === parametro).attachment.height;}
          break;
       default:
         break;
