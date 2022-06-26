@@ -50,6 +50,29 @@ module.exports = {
       "Valor do Field da embed",
       "Inline do Field da embed",
       "Quantidade de Embeds",
+      "Quantidade de Fields",
+      "Objeto da interação",
+      "ID da interação",
+      "Nome da interação",
+      "Tipo de interação",
+      "ID do Autor da interação",
+      "Nome do Autor da interação",
+      "Discriminador do Autor da interação",
+      "Tag do Autor da interação",
+      "Avatar do Autor da interação",
+      "Total de linhas",
+      "Total de compenentes na linha",
+      "Objeto do componente",
+      "ID do Componente",
+      "Tipo de Componente",
+      "Etiqueta do Componente",
+      "Estilo do Componente",
+      "URL do Componente",
+      "O Componente está Ativado/Desativado",
+      "Placeholder do componente",
+      "Mínimo de valores do Menu",
+      "Máximo de valores do Menu",
+      "Opções do Menu",
     ];
     return `${presets.getMessageText(data.message, data.varName)} - ${info[parseInt(data.info, 10)]}`;
   },
@@ -165,11 +188,41 @@ module.exports = {
                                       case 38:
                                         dataType = "Embeds Number";
                                         break;
+                                        case 39:
+                                          dataType = "Fields Number";
+                                          break;
+                                          case 40:
+                                            dataType = "Interaction";
+                                            break;
+                                            case 41:
+                                            dataType = "Interaction";
+                                            break;
+                                            case 42:
+                                            dataType = "Interaction";
+                                            break;
+                                            case 43:
+                                            dataType = "Interaction";
+                                            break;
+                                            case 44:
+                                              dataType = "Interaction User";
+                                              break;
+                                              case 45:
+                                                dataType = "Interaction User";
+                                                break;
+                                                case 46:
+                                                  dataType = "Interaction User";
+                                                  break;
+                                                  case 47:
+                                                    dataType = "Interaction User";
+                                                    break;
+                                                    case 48:
+                                                      dataType = "Interaction User";
+                                                      break;
     }
     return [data.varName2, dataType];
   },
 
-  fields: ["message", "varName", "info", "embednumero", "field", "storage", "varName2"],
+  fields: ["message", "varName", "info", "embednumero", "field", "comp1", "comp2", "storage", "varName2"],
 
 
   html(isEvent, data) {
@@ -202,38 +255,70 @@ module.exports = {
     <option value="19">Servidor da mensagem</option>
 		<option value="20">Tipo de mensagem</option>
 		<option value="21">ID do webhook da mensagem</option>
-    <option value="38">Quantidade de Embeds</options>
-		<option value="22">Objeto Embed da mensagem</option>
+    <optgroup label="Informações da Interação">
+    <option value="40">Objeto da interação</options>
+    <option value="41">ID da interação</options>
+    <option value="42">Nome da interação</options>
+    <option value="43">Tipo de interação</options>
+    <option value="44">ID do Autor da interação</options>
+    <option value="45">Nome do Autor da interação</options>
+    <option value="46">Discriminador do Autor da interação</options>
+    <option value="47">Tag do Autor da interação</options>
+    <option value="48">Avatar do Autor da interação</options>
     <optgroup label="Informações da Embed">
-    <option value="23">Titulo da embed</options>
-    <option value="24">Descrição da embed</options>
-    <option value="25">Url da embed</options>
-    <option value="26">Cor da embed</options>
-    <option value="27">Timestamp da embed</options>
-    <option value="28">Thumbnail da embed</options>
-    <option value="29">Imagem da embed</options>
-    <option value="30">Nome do  autor na embed</options>
-    <option value="31">Icone URL do autor na embed</options>
-    <option value="32">URL do autor na embed</options>
-    <option value="33">Footer texto da embed</options>
-    <option value="34">Footer Icon URL da embed</options>
-    <option value="35">Nome do Field da embed</options>
-    <option value="36">Valor do Field da embed</options>
-    <option value="37">Inline do Field da embed</options>
+    <option value="22">Objeto Embed da mensagem</option>
+    <option value="38">Quantidade de Embeds</options>
+    <option value="39">Quantidade de Fields</options>
+    <option value="23">Titulo</options>
+    <option value="24">Descrição</options>
+    <option value="25">Url</options>
+    <option value="26">Cor</options>
+    <option value="27">Timestamp</options>
+    <option value="28">Thumbnail</options>
+    <option value="29">Imagem</options>
+    <option value="30">Nome do autor</options>
+    <option value="31">Icone URL do autor</options>
+    <option value="32">URL do autor</options>
+    <option value="33">Footer texto</options>
+    <option value="34">Footer Icon URL</options>
+    <option value="35">Nome do Field</options>
+    <option value="36">Valor do Field</options>
+    <option value="37">Inline do Field</options>
+    <optgroup label="Informações dos Componentes">
+    <option value="49">Total de linhas</options>
+    <option value="50">Total de compenentes na linha</options>
+    <option value="51">Objeto do componente</options>
+    <option value="52">ID do Componente</options>
+    <option value="53">Tipo de Componente</options>
+    <option value="54">Etiqueta do Componente</options>
+    <option value="55">Estilo do Componente</options>
+    <option value="56">URL do Componente</options>
+    <option value="57">O Componente está Ativado/Desativado</options>
+    <option value="58">Placeholder do componente</options>
+    <option value="59">Mínimo de valores do Menu</options>
+    <option value="60">Máximo de valores do Menu</options>
+    <option value="61">Opções do Menu</options>
     </optgroup>
 	</select>
-</div><br>
+</div><br><div style="width: 100%;display:none" id="containerxin2">
 <table style="width:100%"><tr><td style="padding:5px">
-<div style="width: 100%;display:none" id="containerxin2">
 <span class="dbminputlabel">Número da Embed</span><br>
 <input id="embednumero" value="0" class="round" type="text">
-<br>
-</div></td><td style="padding:5px">
+<br></td><td style="padding:5px">
 <div style="width: 100%;" id="containerxin">
 <span class="dbminputlabel">Número da Field</span><br>
 <input id="field" value="0" class="round" type="text">
 <br>
-</div></td></tr></table>
+</div></td></tr></table></div>
+<table style="width:100%">
+<tr><td style="padding:5px"><div id="containerxin3">
+<span class="dbminputlabel">Número da linha</span><br>
+<input id="comp1" value="0" class="round" type="text">
+<br></div></td><td style="padding:5px"><div id="containerxin4">
+<span class="dbminputlabel">Número do componente</span><br>
+<input id="comp2" value="0" class="round" type="text">
+<br></div>
+</td></tr></table></div>
 
 <store-in-variable dropdownLabel="Armazenar em" selectId="storage" variableContainerId="varNameContainer2" variableInputId="varName2"></store-in-variable>`;
   },
@@ -245,18 +330,46 @@ module.exports = {
     glob.onComparisonChanged = function (event) {
       if (event.value > 21) {
         document.getElementById("containerxin2").style.display = "block";
+         document.getElementById("containerxin3").style.display = "none";
+         document.getElementById("containerxin4").style.display = "none";
       }
       if (event.value < 22) {
         document.getElementById("containerxin2").style.display = "none";
+        document.getElementById("containerxin3").style.display = "none";
+        document.getElementById("containerxin4").style.display = "none";
       }
       if (event.value < 35) {
         document.getElementById("containerxin").style.display = "none";
+        document.getElementById("containerxin3").style.display = "none";
+        document.getElementById("containerxin4").style.display = "none";
       } else {
         document.getElementById("containerxin").style.display = "block";
+        document.getElementById("containerxin3").style.display = "none";
+        document.getElementById("containerxin4").style.display = "none";
       }
-      if (event.value == 38) {
+      if (event.value > 37) {
         document.getElementById("containerxin").style.display = "none";
         document.getElementById("containerxin2").style.display = "none";
+        document.getElementById("containerxin3").style.display = "none";
+        document.getElementById("containerxin4").style.display = "none";
+      }
+      if (event.value == 39) {
+        document.getElementById("containerxin").style.display = "none";
+        document.getElementById("containerxin2").style.display = "block";
+        document.getElementById("containerxin3").style.display = "none";
+        document.getElementById("containerxin4").style.display = "none";
+      }
+      if (event.value > 50) {
+        document.getElementById("containerxin").style.display = "none";
+        document.getElementById("containerxin2").style.display = "none";
+        document.getElementById("containerxin3").style.display = "block";
+        document.getElementById("containerxin4").style.display = "block";
+      }
+      if (event.value == 50) {
+        document.getElementById("containerxin").style.display = "none";
+        document.getElementById("containerxin2").style.display = "none";
+        document.getElementById("containerxin3").style.display = "block";
+        document.getElementById("containerxin4").style.display = "none";
       }
     };
 
@@ -270,6 +383,8 @@ module.exports = {
     const data = cache.actions[cache.index];
     let field = this.evalMessage(data.field, cache);
     let embednumero = this.evalMessage(data.embednumero, cache);
+    let comp1 = this.evalMessage(data.comp1, cache);
+    let comp2 = this.evalMessage(data.comp2, cache);
     const msg = await this.getMessageFromData(data.message, data.varName, cache);
 
     if (!msg) {
@@ -457,7 +572,195 @@ module.exports = {
             result = 0;
           } else {
           result = msg.embeds.length;}
-        break;     
+        break;
+        case 39:
+          if(msg.embeds.length <= embednumero) {
+            result = 0;
+          } else {
+          result = msg.embeds[embednumero].fields.length}
+        break;   
+        case 40:
+          if(msg.interaction == undefined) {
+            result = null;
+          } else {
+          result = msg.interaction}
+        break;
+        case 41:
+          if(msg.interaction == undefined) {
+            result = null;
+          } else {
+          result = msg.interaction.id}
+        break;  
+        case 42:
+          if(msg.interaction == undefined) {
+            result = null;
+          } else {
+          result = msg.interaction.commandName}
+        break;  
+        case 43:
+          if(msg.interaction == undefined) {
+            result = null;
+          } else {
+          result = msg.interaction.type}
+        break;
+        case 44:
+          if(msg.interaction == undefined) {
+            result = null;
+          } else {
+          result = msg.interaction.user.id}
+        break; 
+        case 45:
+          if(msg.interaction == undefined) {
+            result = null;
+          } else {
+          result = msg.interaction.user.username}
+        break; 
+        case 46:
+          if(msg.interaction == undefined) {
+            result = null;
+          } else {
+          result = msg.interaction.user.discriminator}
+        break; 
+        case 47:
+          if(msg.interaction == undefined) {
+            result = null;
+          } else {
+          result = msg.interaction.user.tag}
+        break; 
+        case 48:
+          if(msg.interaction == undefined) {
+            result = null;
+          } else {
+          result = msg.interaction.user.displayAvatarURL({ dynamic: true, format: "png", size: 4096 })}
+        break; 
+
+        case 49:
+          if(msg.components.length == 0) {
+            result = null;
+          } else {
+          result = msg.components.length}
+        break;
+
+        case 50:
+         if(msg.components.length == 0) {
+            result = null;
+          } else {
+            if(msg.components.length <= comp1) {
+              result = null;
+            } else {
+          result = msg.components[comp1].components.length}}
+        break;
+        
+        case 51:
+          if(msg.components.length == 0) {
+            result = null;
+          } else {
+            if(msg.components.length <= comp1) {
+              result = null;
+            } else {
+          result = msg.components[comp1].components[comp2]}}
+        break;    
+            
+        case 52:
+          if(msg.components.length == 0) {
+            result = null;
+          } else {
+            if(msg.components.length <= comp1) {
+              result = null;
+            } else {
+          result = msg.components[comp1].components[comp2].customId}}
+        break;
+
+        case 53:
+                  if(msg.components.length == 0) {
+            result = null;
+          } else {
+            if(msg.components.length <= comp1) {
+              result = null;
+            } else {
+          result = msg.components[comp1].components[comp2].type}}
+        break;
+
+        case 54:
+          if(msg.components.length == 0) {
+            result = null;
+          } else {
+            if(msg.components.length <= comp1) {
+              result = null;
+            } else {
+          result = msg.components[comp1].components[comp2].label}}
+        break; 
+
+        case 55:
+          if(msg.components.length == 0) {
+            result = null;
+          } else {
+            if(msg.components.length <= comp1) {
+              result = null;
+            } else {
+          result = msg.components[comp1].components[comp2].style}}
+        break; 
+
+        case 56:
+          if(msg.components.length == 0) {
+            result = null;
+          } else {
+            if(msg.components.length <= comp1) {
+              result = null;
+            } else {
+          result = msg.components[comp1].components[comp2].url}}
+        break; 
+
+        case 57:
+          if(msg.components.length == 0) {
+            result = null;
+          } else {
+            if(msg.components.length <= comp1) {
+              result = null;
+            } else {
+          result = msg.components[comp1].components[comp2].disabled}}
+        break;
+        
+        case 58:
+          if(msg.components.length == 0) {
+            result = null;
+          } else {
+            if(msg.components.length <= comp1) {
+              result = null;
+            } else {
+          result = msg.components[comp1].components[comp2].placeholder}}
+        break;
+
+        case 59:
+          if(msg.components.length == 0) {
+            result = null;
+          } else {
+            if(msg.components.length <= comp1) {
+              result = null;
+            } else {
+          result = msg.components[comp1].components[comp2].minValues}}
+        break;
+
+        case 60:
+          if(msg.components.length == 0) {
+            result = null;
+          } else {
+            if(msg.components.length <= comp1) {
+              result = null;
+            } else {
+          result = msg.components[comp1].components[comp2].maxValues}}
+        break;
+        
+        case 61:
+          if(msg.components.length == 0) {
+            result = null;
+          } else {
+            if(msg.components.length <= comp1) {
+              result = null;
+            } else {
+          result = msg.components[comp1].components[comp2].options}}
+        break;  
+
       default:
         break;
     } 
