@@ -128,96 +128,135 @@ module.exports = {
       case 18:
         dataType = "Number";
         break;
-      case 19:
-        dataType = "Guild";
-        break;
-      case 20:
-        dataType = "Message Type";
-        break;
-      case 21:
-        dataType = "Webhook ID";
-        break;
-      case 22:
-        dataType = "Embed Message";
-        break;
-        case 23:
-          dataType = "Embed Message";
-          break;
-          case 24:
-            dataType = "Embed Message";
-            break;
-            case 25:
-              dataType = "Embed Message";
-              break;
-              case 26:
-                dataType = "Embed Message";
-                break;
-                case 27:
-                  dataType = "Embed Message";
-                  break;
-                  case 28:
-                    dataType = "Embed Message";
-                    break;
-                    case 29:
-                      dataType = "Embed Message";
-                      break;
-                      case 30:
-                        dataType = "Embed Message";
-                        break;
-                        case 31:
-                          dataType = "Embed Message";
-                          break;
-                          case 32:
-                            dataType = "Embed Message";
-                            break;
-                            case 33:
-                              dataType = "Embed Message";
-                              break;
-                              case 34:
-                                dataType = "Embed Message";
-                                break;
-                                case 35:
-                                  dataType = "Embed Message";
-                                  break;
-                                  case 36:
-                                    dataType = "Embed Message";
-                                    break;
-                                    case 37:
-                                      dataType = "Embed Message";
-                                      break;
-                                      case 38:
-                                        dataType = "Embeds Number";
-                                        break;
-                                        case 39:
-                                          dataType = "Fields Number";
-                                          break;
-                                          case 40:
-                                            dataType = "Interaction";
-                                            break;
-                                            case 41:
-                                            dataType = "Interaction";
-                                            break;
-                                            case 42:
-                                            dataType = "Interaction";
-                                            break;
-                                            case 43:
-                                            dataType = "Interaction";
-                                            break;
-                                            case 44:
-                                              dataType = "Interaction User";
-                                              break;
-                                              case 45:
-                                                dataType = "Interaction User";
-                                                break;
-                                                case 46:
-                                                  dataType = "Interaction User";
-                                                  break;
-                                                  case 47:
-                                                    dataType = "Interaction User";
-                                                    break;
-                                                    case 48:
-                                                      dataType = "Interaction User";
-                                                      break;
+case 19:
+dataType = "Guild";
+break;
+case 20:
+dataType = "Message Type";
+break;
+case 21:
+dataType = "Webhook ID";
+break;
+case 22:
+dataType = "Embed Message";
+break;
+case 23:
+dataType = "Embed Message";
+break;
+case 24:
+dataType = "Embed Message";
+break;
+case 25:
+dataType = "Embed Message";
+break;
+case 26:
+dataType = "Embed Message";
+break;
+case 27:
+dataType = "Embed Message";
+break;
+case 28:
+dataType = "Embed Message";
+break;
+case 29:
+dataType = "Embed Message";
+break;
+case 30:
+dataType = "Embed Message";
+break;
+case 31:
+dataType = "Embed Message";
+break;
+case 32:
+dataType = "Embed Message";
+break;
+case 33:
+dataType = "Embed Message";
+break;
+case 34:
+dataType = "Embed Message";
+break;
+case 35:
+dataType = "Embed Message";
+break;
+case 36:
+dataType = "Embed Message";
+break;
+case 37:
+dataType = "Embed Message";
+break;
+case 38:
+dataType = "Embeds Number";
+break;
+case 39:
+dataType = "Fields Number";
+break;
+case 40:
+dataType = "Interaction";
+break;
+case 41:
+dataType = "Interaction";
+break;
+case 42:
+dataType = "Interaction";
+break;
+case 43:
+dataType = "Interaction";
+break;
+case 44:
+dataType = "Interaction User";
+break;
+case 45:
+dataType = "Interaction User";
+break;
+case 46:
+dataType = "Interaction User";
+break;
+case 47:
+dataType = "Interaction User";
+break;
+case 48:
+dataType = "Interaction User";
+break;
+case 49:
+dataType = "Component";
+break;
+case 50:
+dataType = "Component";
+break;
+case 51:
+dataType = "Component";
+break;
+case 52:
+dataType = "Component";
+break;
+case 53:
+dataType = "Component";
+break;
+case 54:
+dataType = "Component";
+break;
+case 55:
+dataType = "Component";
+break;
+case 56:
+dataType = "Component";
+break;
+case 57:
+dataType = "Component";
+break;
+case 58:
+dataType = "Component";
+break;
+case 59:
+dataType = "Component";
+break;
+case 60:
+dataType = "Component";
+break;
+case 61:
+dataType = "Component";
+break;
     }
     return [data.varName2, dataType];
   },
