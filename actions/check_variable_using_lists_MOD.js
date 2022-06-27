@@ -27,8 +27,8 @@ module.exports = {
 	<div style="float: left; width: 100%;">
 		<span class="dbminputlabel">Tipo de comparação</span><br>
 		<select id="comparison" class="round" onchange="glob.onComparisonChanged(this)">
-      <option value="0">É igual os elementos da lista</option>
-      <option value="1">Inclui os elementos da lista</option>
+      <option value="0">É igual a um dos elementos da lista</option>
+      <option value="1">Inclui em algum dos elementos da lista</option>
 		</select>
 	</div>
 
