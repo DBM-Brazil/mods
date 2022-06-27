@@ -23,6 +23,7 @@ module.exports = {
         "É o autor do comando?",
         "É o proprietário atual do servidor?",
         "Está no canal AFK?",
+        "Impulsionou o servidor?",
       ];
       return `${info[parseInt(data.info, 10)]} > ${presets.getConditionsText(data)}`;
     },
@@ -49,6 +50,7 @@ module.exports = {
       ${!isEvent && '<option value="9">É o autor do comando?</option>'}
       ${!isEvent && '<option value="10">É o proprietário atual do servidor?</option>'}
       <option value="11">Está no canal AFK?</option>
+      <option value="12">Impulsionou o servidor?</option>
     </select>
   </div>
 </div><br><br><br><br>
@@ -120,6 +122,9 @@ module.exports = {
         break;
       case 11:
         result = member.voice?.channel === targetServer.afkChannel;
+        break;
+      case 12:
+        result = Boolean(member.premiumSinceTimestamp);
         break;
       default:
         console.log('Verifique sua ação "Verifique se o membro"! Há algo errado...');
