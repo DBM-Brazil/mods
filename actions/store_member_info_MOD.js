@@ -47,6 +47,7 @@ module.exports = {
       "Timestamp do membro expirou",
       "URL do banner do membro",
       "ID do Servidor do Membro",
+      "Timestamp do Impulso do Membro",
     ];
     return `${presets.getMemberText(data.member, data.varName)} - ${info[parseInt(data.info, 10)]}`;
   },
@@ -143,6 +144,9 @@ module.exports = {
             case 35:
               dataType = "Server ID";
               break;
+              case 36:
+                dataType = "Timestamp";
+                break;
     }
     return [data.varName2, dataType];
   },
@@ -194,6 +198,7 @@ module.exports = {
   <option value="29">Status do cliente membro [Web ou Mobile]</option>
   <option value="32">Tempo esgotado do membro em</option>
   <option value="33">Timestamp do membro expirado</option>
+  <option value="36">Timestamp do Impulso do Membro</option>
 	</select>
 </div>
 
@@ -335,6 +340,9 @@ module.exports = {
         case 35:
           result = member.guild.id;
           break;
+          case 36:
+            result = member.premiumSinceTimestamp;
+            break;
       default:
         break;
     }
