@@ -10,7 +10,7 @@ module.exports = {
     },
 
   subtitle(data) {
-    const categories = ['You cheater!', 'Temp Variable', 'Server Variable', 'Global Variable'];
+    const categories = ['You cheater!', 'Variavel temporaria', 'Variavel Servidor', 'Variavel Global'];
     const info = [
       "ID da Categoria",
       "Nome da Categoria",
@@ -18,14 +18,23 @@ module.exports = {
       "Posição da Categoria",
       "A categoria é gerenciável?",
       "A categoria é apagável?",
-      "Lista de canais da categoria",
-      "Total de canais da categoria",
-      "Lista de canais de texto da categoria",
-      "Total de canais de texto da categoria",
-      "Lista de canais de voz da categoria",
-      "Total de canais de voz da categoria",
-      "Lista de canais de palco da categoria",
-      "Total de canais de palco da categoria",
+      "Lista de canais",
+      "Total de canais",
+      "Lista de canais de texto",
+      "Total de canais de texto",
+      "Lista de canais de voz",
+      "Total de canais de voz",
+      "Lista de canais de palco",
+      "Total de canais de palco",
+      "Lista de tópicos dos canais",
+      "Lista por ID dos canais",
+      "Lista por ID dos canais de texto",
+      "Lista por ID dos canais de voz",
+      "Lista por ID dos canais de palco",
+      "Lista por Nome dos canais",
+      "Lista por Nome dos canais de texto",
+      "Lista por Nome dos canais de voz",
+      "Lista por Nome dos canais de palco",
     ];
     return `${categories[parseInt(data.category, 10)]} - ${info[parseInt(data.info, 10)]}`;
   },
@@ -35,48 +44,76 @@ module.exports = {
     let dataType = 'Unknown Type';
     switch (parseInt(data.info, 10)) {
       case 0:
-        dataType = 'Category ID';
+  dataType = 'Category ID';
         break;
       case 1:
-        dataType = 'Text';
+  dataType = 'Text';
         break;
       case 2:
-        dataType = 'Server';
+  dataType = 'Server';
         break;
       case 3:
       case 7:
       case 9:
       case 11:
-        dataType = 'Number';
+  dataType = 'Number';
         break;
       case 4:
       case 5:
-        dataType = 'Boolean';
+  dataType = 'Boolean';
         break;
       case 6:
-        dataType = 'List';
+  dataType = 'List';
         break;
         case 7:
-          dataType = 'Number';
+    dataType = 'Number';
           break;
           case 8:
-            dataType = 'List';
+dataType = 'List';
             break;
             case 9:
-              dataType = 'Number';
+  dataType = 'Number';
               break;
               case 10:
-                dataType = 'List';
+dataType = 'List';
                 break;
                 case 11:
-                  dataType = 'Number';
+dataType = 'Number';
                   break;
                   case 12:
-                    dataType = 'List';
+dataType = 'List';
                     break;
                     case 13:
-                      dataType = 'Number';
+dataType = 'Number';
                       break;
+                      case 14:
+dataType = 'List';
+break;
+case 15:
+dataType = 'List';
+break;
+case 16:
+dataType = 'List';
+break;
+case 17:
+dataType = 'List';
+break;
+case 18:
+dataType = 'List';
+break;
+case 19:
+dataType = 'List';
+break;
+case 20:
+dataType = 'List';
+break;
+case 21:
+dataType = 'List';
+break;
+case 22:
+dataType = 'List';
+break;
+
         break;
       default:
         break;
@@ -89,7 +126,7 @@ module.exports = {
   html(isEvent, data) {
     return `
 <div>
-  <div style="float: left; width: 35%;">
+<div style="float: left; width: 35%;">
   <span class="dbminputlabel">Categoria de origem</span><br>
     <select id="category" class="round" onchange="glob.refreshVariableList(this)">
       ${data.variables[1]}
@@ -101,7 +138,7 @@ module.exports = {
   </div>
 </div><br><br><br>
 <div>
-  <div style="padding-top: 8px; width: 70%;">
+  <div style="padding-top: 8px; width: 100%;">
   <span class="dbminputlabel">Informações de origem</span><br>
     <select id="info" class="round">
       <optgroup label="Principal">
@@ -112,15 +149,25 @@ module.exports = {
       <option value="4">A categoria é gerenciável?</option>
       <option value="5">A categoria é apagável?</option>
       </optgroup>
-      <optgroup label="Informações">
-      <option value="6">Lista de canais da categoria</option>
-      <option value="7">Total de canais da categoria</option>
-      <option value="8">Lista de canais de texto da categoria</option>
-      <option value="9">Total de canais de texto da categoria</option>
-      <option value="10">Lista de canais de voz da categoria</option>
-      <option value="11">Total de canais de voz da categoria</option>
-      <option value="12">Lista de canais de palco da categoria</option>
-      <option value="13">Total de canais de palco da categoria</option>
+      <optgroup label="Total">
+      <option value="7">Total de canais</option>
+      <option value="9">Total de canais de texto</option>
+      <option value="11">Total de canais de voz</option>
+      <option value="13">Total de canais de palco</option>
+      <optgroup label="Listas">
+      <option value="6">Lista de canais</option>
+      <option value="8">Lista de canais de texto</option>
+      <option value="10">Lista de canais de voz</option>
+      <option value="12">Lista de canais de palco</option>
+      <option value="14">Lista de tópicos dos canais</option>
+      <option value="15">Lista por ID dos canais</option>
+      <option value="16">Lista por ID dos canais de texto</option>
+      <option value="17">Lista por ID dos canais de voz</option>
+      <option value="18">Lista por ID dos canais de palco</option>
+      <option value="19">Lista por Nome dos canais</option>
+      <option value="20">Lista por Nome dos canais de texto</option>
+      <option value="21">Lista por Nome dos canais de voz</option>
+      <option value="22">Lista por Nome dos canais de palco</option>
     </select>
   </div>
 </div><br>
@@ -207,33 +254,72 @@ module.exports = {
         result = targetCategory.deletable;
         break;
       case 6:
-        result = targetCategory.children.filter(channels => channels).map(channels => channels).join(",");
+        result = targetCategory.children.filter(channels => channels).map(channels => channels);
         break;
       case 7:
-        result = targetCategory.children.size;
+        if(targetCategory.children.size == undefined) {
+          result = 0;
+        } else {
+        result = targetCategory.children.size;}
         break;
       case 8:
-        result = targetCategory.children.filter((c) => ['GUILD_TEXT', 'GUILD_NEWS'].includes(c.type)).map(channels => channels).join(",");
+        result = targetCategory.children.filter((c) => ['GUILD_TEXT', 'GUILD_NEWS'].includes(c.type)).map(channels => channels);
         break;
       case 9:
-        result = targetCategory.children.filter((c) => ['GUILD_TEXT', 'GUILD_NEWS'].includes(c.type)).size;
+        if(targetCategory.children.filter((c) => ['GUILD_TEXT', 'GUILD_NEWS'].includes(c.type)).size == undefined) {
+          result = 0;
+        } else {
+        result = targetCategory.children.filter((c) => ['GUILD_TEXT', 'GUILD_NEWS'].includes(c.type)).size;}
         break;
         case 10:
-          result = targetCategory.children.filter((c) => ['GUILD_VOICE'].includes(c.type)).map(channels => channels).join(",");
+          result = targetCategory.children.filter((c) => ['GUILD_VOICE'].includes(c.type)).map(channels => channels);
           break;
         case 11:
-          result = targetCategory.children.filter((c) => ['GUILD_VOICE'].includes(c.type)).size;
+          if(targetCategory.children.filter((c) => ['GUILD_VOICE'].includes(c.type)).size == undefined) {
+            result = 0;
+          } else {
+          result = targetCategory.children.filter((c) => ['GUILD_VOICE'].includes(c.type)).size;}
           break;
           case 12:
-            result = targetCategory.children.filter((c) => ['GUILD_STAGE_VOICE'].includes(c.type)).map(channels => channels).join(",");
+            result = targetCategory.children.filter((c) => ['GUILD_STAGE_VOICE'].includes(c.type)).map(channels => channels);
             break;
           case 13:
-            result = targetCategory.children.filter((c) => ['GUILD_STAGE_VOICE'].includes(c.type)).size;
+            if(targetCategory.children.filter((c) => ['GUILD_STAGE_VOICE'].includes(c.type)).size == undefined) {
+              result = 0;
+            } else {
+            result = targetCategory.children.filter((c) => ['GUILD_STAGE_VOICE'].includes(c.type)).size;}
             break;
+            case 14:
+              result = targetCategory.children.filter((c) => ['GUILD_TEXT', 'GUILD_NEWS'].includes(c.type)).map(channels => channels.topic);
+              break;
+              case 15:
+                result = targetCategory.children.filter(channels => channels).map(channels => channels.id);
+                break;
+                case 16:
+                  result = targetCategory.children.filter((c) => ['GUILD_TEXT', 'GUILD_NEWS'].includes(c.type)).map(channels => channels.id);
+                  break;
+                  case 17:
+                    result = targetCategory.children.filter((c) => ['GUILD_VOICE'].includes(c.type)).map(channels => channels.id);
+                    break;
+                    case 18:
+                      result = targetCategory.children.filter((c) => ['GUILD_STAGE_VOICE'].includes(c.type)).map(channels => channels.id);
+                   break;
+                   case 19:
+                    result = targetCategory.children.filter(channels => channels).map(channels => channels.name);
+                    break;
+                    case 20:
+                      result = targetCategory.children.filter((c) => ['GUILD_TEXT', 'GUILD_NEWS'].includes(c.type)).map(channels => channels.name);
+                      break;
+                      case 21:
+                        result = targetCategory.children.filter((c) => ['GUILD_VOICE'].includes(c.type)).map(channels => channels.name);
+                        break;
+                        case 22:
+                          result = targetCategory.children.filter((c) => ['GUILD_STAGE_VOICE'].includes(c.type)).map(channels => channels.name);
+                       break;
       default:
         break;
     }
-    if (result) {
+    if (result !== undefined) {
       const storage = parseInt(data.storage, 10);
       const varName2 = this.evalMessage(data.varName2, cache);
       this.storeValue(result, storage, varName2, cache);
