@@ -12,8 +12,8 @@ module.exports = {
       },
    
     subtitle: function(data) {
-        const info = ['Dia da semana', 'Dia (número)', 'Dia do ano', 'Semana do ano', 'Mês do ano', 'Mês (numero)', 'Ano', 'Hora', 'Minutos', 'Segundos', 'Milissegundos', 'Fuso horário', 'Unix Timestamp', 'Data completa']
-        const storage = ['', 'Variável Temporaria', 'Variável Servidor', 'Variável Global']
+        const info = ['Dia da semana', 'Dia (número)', 'Dia do ano', 'Semana do ano', 'Mês do ano', 'Mês (número)', 'Ano', 'Hora', 'Minutos', 'Segundos', 'Milissegundos', 'Fuso horário', 'Unix Timestamp', 'Data completa']
+        const storage = ['', 'Variável Temporária', 'Variável Servidor', 'Variável Global']
         return `${data.modeStorage === "0" ? '"' + info[data.info] + '"' : data.buildInput === "" ? '"Não configurado"' : '"' + data.buildInput + '"'} de uma data ~ ${storage[data.storage]}`;
     },
     
