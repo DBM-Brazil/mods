@@ -106,13 +106,13 @@ module.exports = {
     
         switch (INTO) {
                 case 0:
-                    result = Math.round(theVar.toString().replace(',','.'));
+                    result = parseInt(theVar.toString().replace(",", "."));
                     break;
                 case 1:
-                    result = Math.ceil(theVar.toString().replace(',','.'));
+                    result = Math.ceil(parseFloat(theVar.toString().replace(',','.')));
                     break;
                 case 2:
-                    result = parseInt(theVar);
+                    result = Math.floor(parseFloat(theVar.toString().replace(',','.')));
                     break;
                 case 3:
                     result = theVar.toString();
