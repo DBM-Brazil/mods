@@ -12,8 +12,8 @@ module.exports = {
       },
    
     subtitle: function(data) {
-        const info = ['Dia da semana', 'Dia (numero)', 'Dia do ano', 'Semana do ano', 'Mês do ano', 'Mês (numero)', 'Ano', 'Hora', 'Minutos', 'Segundos', 'Milissegundos', 'Fuso horário', 'Unix Timestamp']
-        const storage = ['', 'Variavel Temporaria', 'Variavel Servidor', 'Variavel Global']
+        const info = ['Dia da semana', 'Dia (número)', 'Dia do ano', 'Semana do ano', 'Mês do ano', 'Mês (numero)', 'Ano', 'Hora', 'Minutos', 'Segundos', 'Milissegundos', 'Fuso horário', 'Unix Timestamp', 'Data completa']
+        const storage = ['', 'Variável Temporaria', 'Variável Servidor', 'Variável Global']
         return `${data.modeStorage === "0" ? '"' + info[data.info] + '"' : data.buildInput === "" ? '"Não configurado"' : '"' + data.buildInput + '"'} de uma data ~ ${storage[data.storage]}`;
     },
     
@@ -78,7 +78,7 @@ module.exports = {
             </select>
         </div>
         <div id="varNameContainer" style="float: right; width: 62%">
-        <span class="dbminputlabel">Nome da variavel:</span><br>
+        <span class="dbminputlabel">Nome da variável:</span><br>
             <input id="varName" class="round" type="text">
         </div><br><br><br>
         <div id="noteContainer" style="display: none; padding-top: 16px">
@@ -148,7 +148,7 @@ module.exports = {
     
     action: function(cache) {
         const data = cache.actions[cache.index];
-        const moment = this.getWrexMods().require("moment");
+        const moment = require("moment");
         const dateLanguage = this.evalMessage(data.dateLanguage, cache);
         const date = moment(Date.parse(this.evalMessage(data.sourceDate, cache)), "", dateLanguage === "" ? "en" : dateLanguage);
         const buildInput = this.evalMessage(data.buildInput, cache);
