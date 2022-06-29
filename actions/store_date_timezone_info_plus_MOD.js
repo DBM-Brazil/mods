@@ -12,14 +12,13 @@ module.exports = {
       },
    
     subtitle: function(data) {
-        const info = ['Dia da semana', 'Dia (numero)', 'Dia do ano', 'Semana do ano', 'Mês do ano', 'Mês (numero)', 'Ano', 'Hora', 'Minutos', 'Segundos', 'Milissegundos', 'Fuso horário', 'Unix Timestamp', 'Data completa']
-        const storage = ['', 'Variavel Temporaria', 'Variavel Servidor', 'Variavel Global']
+        const info = ['Dia da semana', 'Dia (número)', 'Dia do ano', 'Semana do ano', 'Mês do ano', 'Mês (número)', 'Ano', 'Hora', 'Minutos', 'Segundos', 'Milissegundos', 'Fuso horário', 'Unix Timestamp', 'Data completa']
+        const storage = ['', 'Variável Temporária', 'Variável Servidor', 'Variável Global']
         return `${data.modeStorage === "0" ? '"' + info[data.info] + '"' : data.buildInput === "" ? '"Não configurado"' : '"' + data.buildInput + '"'} de uma data ~ ${storage[data.storage]}`;
     },
     
  
     short_description: "Armazena algo de uma data de forma mais completa!",
-    depends_on_mods: ["WrexMODS"],
     
     variableStorage: function (data, varType) {
         const type = parseInt(data.storage);
@@ -82,7 +81,7 @@ module.exports = {
             </select>
         </div>
         <div id="varNameContainer" style="float: right; width: 62%">
-        <span class="dbminputlabel">Nome da variavel:</span><br>
+        <span class="dbminputlabel">Nome da variável:</span><br>
             <input id="varName" class="round" type="text">
         </div><br><br><br>
         <div id="noteContainer" style="display: none; padding-top: 16px">
@@ -158,7 +157,7 @@ module.exports = {
       const date = moment(
         Date.parse(this.evalMessage(data.sourceDate, cache)),
         '',
-        dateLanguage === '' ? 'pt' : dateLanguage,
+        dateLanguage === '' ? 'en' : dateLanguage,
       ).tz(timezone);
       const buildInput = this.evalMessage(data.buildInput, cache);
       const modeType = parseInt(this.evalMessage(data.modeStorage, cache), 10);
